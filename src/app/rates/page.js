@@ -112,7 +112,7 @@ export default function Rates() {
                         Lock live wholesale gold prices for upcoming wedding orders directly with our senior bullion desk.
                     </p>
                     <a
-                        href="https://wa.me/918881121119?text=Namaste%20Yash%20Jewellers,%20I%20am%20interested%20in%20locking%20gold%20rates%20for%20a%20wedding%20jewellery%20purchase."
+                        href="https://api.whatsapp.com/send?phone=919336120419&text=Namaste%20Yash%20Jewellers,%20I%20am%20interested%20in%20locking%20gold%20rates%20for%20a%20wedding%20jewellery%20purchase."
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 bg-[#6B0E2A] hover:bg-[#851336] text-white px-8 py-3 text-xs uppercase font-bold tracking-widest border border-[#C5A059]/50 transition-colors"

@@ -135,7 +135,7 @@ export default function Header() {
 
                     {/* Quick Call Icon for Mobile */}
                     <a 
-                        href="tel:+918881121119" 
+                        href="tel:+919336120419" 
                         aria-label="Call Yash Jewellers"
                         className="md:hidden text-[#6B0E2A] p-2 hover:bg-[#F3E8D0] rounded-full transition-colors"
                     >
@@ -203,7 +203,7 @@ export default function Header() {
 
                         <div className="pt-6 border-t border-[#C5A059]/30 space-y-3">
                             <a 
-                                href="https://wa.me/918881121119"
+                                href="https://api.whatsapp.com/send?phone=919336120419"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-full flex items-center justify-center gap-2 bg-[#6B0E2A] text-white py-3 rounded-none text-xs font-bold uppercase tracking-widest border border-[#C5A059]/40"
