@@ -1,0 +1,223 @@
+"use client";
+
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
+import { Menu, X, Phone, TrendingUp, ShieldCheck, Sparkles, Calendar, MessageCircle, ChevronDown } from 'lucide-react';
+
+export default function Header() {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [scrolled, setScrolled] = useState(false);
+    const [goldRate, setGoldRate] = useState(145200);
+    const [rateTrend, setRateTrend] = useState('');
+
+    useEffect(() => {
+        const handleScroll = () => setScrolled(window.scrollY > 20);
+        window.addEventListener('scroll', handleScroll);
+
+        // Fetch initial rate from API
+        fetch('/api/rates')
+            .then(res => res.json())
+            .then(data => {
+                if (data?.rates?.gold24k) setGoldRate(data.rates.gold24k);
+            })
+            .catch(() => {});
+
+        // Realistic live rate tick update
+        const interval = setInterval(() => {
+            const delta = (Math.floor(Math.random() * 3) + 1) * 10 * (Math.random() > 0.5 ? 1 : -1);
+            setGoldRate(prev => {
+                const updated = prev + delta;
+                setRateTrend(delta > 0 ? 'tick-up' : 'tick-down');
+                setTimeout(() => setRateTrend(''), 1200);
+                return updated;
+            });
+        }, 3200);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            clearInterval(interval);
+        };
+    }, []);
+
+    const formatINR = (n) => new Intl.NumberFormat('en-IN').format(n);
+
+    return (
+        <header className="z-50 sticky top-0 font-sans shadow-md">
+            {/* Top Bar - Deep Burgundy Velvet with Antique Gold Detailing */}
+            <div className="bg-[#270611] text-[#F3E8D0] text-[11px] py-2 px-4 md:px-8 flex justify-between items-center border-b border-[#C5A059]/30">
+                <div className="flex items-center gap-3 md:gap-6">
+                    <span className="hidden sm:inline-flex items-center gap-1.5 text-[#EAD8B1] tracking-wider">
+                        <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059] animate-pulse"></span>
+                        <span className="font-serif italic">विरासत एवं विश्वास</span> · Kanpur &amp; Delhi Benchmark · Estd. 1975
+                    </span>
+                    <span className="flex items-center gap-1 text-[#C5A059] font-medium tracking-wide">
+                        <ShieldCheck size={13} className="text-[#DFBE7A]" /> 100% BIS Hallmarked 916 Gold
+                    </span>
+                </div>
+
+                <div className="flex items-center gap-4">
+                    <Link href="/rates" className="flex items-center gap-1.5 hover:opacity-90 transition-opacity bg-[#3A091A] px-2.5 py-1 rounded-sm border border-[#C5A059]/25">
+                        <TrendingUp className="w-3.5 h-3.5 text-[#C5A059]" />
+                        <span className="text-[#EAD8B1] text-[10px] uppercase tracking-wider font-semibold">24K 999 (10g):</span>
+                        <span className={`rate-val font-mono font-bold text-xs ${rateTrend}`}>
+                            ₹{formatINR(goldRate)}
+                        </span>
+                    </Link>
+
+                    <Link href="/rates" className="text-[10px] text-[#C5A059] hover:text-[#FFF0D0] uppercase tracking-widest hidden md:inline font-bold transition-colors">
+                        Live Board →
+                    </Link>
+                </div>
+            </div>
+
+            {/* Main Navigation - Warm Ivory Silk with Hairline Gold Accents */}
+            <div className={`w-full transition-all duration-300 border-b border-[#C5A059]/20 ${
+                scrolled ? 'bg-[#FAF7F2]/95 backdrop-blur-md shadow-[0_4px_20px_rgba(39,6,17,0.08)] py-3' : 'bg-[#FAF7F2] py-4'
+            }`}>
+                <div className="container mx-auto px-4 md:px-8 flex justify-between items-center">
+                    
+                    {/* Mobile Menu Button */}
+                    <button 
+                        onClick={() => setIsMenuOpen(true)} 
+                        aria-label="Open Navigation Menu"
+                        className="md:hidden text-[#270611] p-1.5 hover:text-[#6B0E2A] transition-colors"
+                    >
+                        <Menu size={26} />
+                    </button>
+
+                    {/* Royal Logo & Monogram */}
+                    <Link href="/" className="flex flex-col items-center group text-center mx-auto md:mx-0">
+                        <div className="flex items-center gap-2">
+                            <span className="h-px w-6 bg-[#C5A059] hidden sm:inline-block" />
+                            <span className="text-[9px] uppercase tracking-[0.35em] text-[#6B0E2A] font-semibold">
+                                Kanpur · Estd. 1975
+                            </span>
+                            <span className="h-px w-6 bg-[#C5A059] hidden sm:inline-block" />
+                        </div>
+                        <h1 className="font-serif text-2xl md:text-3xl lg:text-[32px] tracking-[0.08em] font-normal text-[#270611] leading-none mt-1">
+                            YASH <span className="font-serif italic font-bold text-gold-gradient">JEWELLERS</span>
+                        </h1>
+                        <span className="text-[9px] tracking-[0.25em] text-[#8C6D38] uppercase font-medium mt-1">
+                            शाही आभूषण एवं शुद्धता का प्रतीक
+                        </span>
+                    </Link>
+
+                    {/* Desktop Links */}
+                    <nav className="hidden md:flex gap-7 items-center">
+                        {[
+                            { name: 'Home', path: '/', hi: 'गृह' },
+                            { name: 'Collections', path: '/shop', hi: 'संग्रह' },
+                            { name: 'Live Rates', path: '/rates', hi: 'भाव' },
+                            { name: 'Heritage', path: '/about', hi: 'विरासत' },
+                            { name: 'Boutique', path: '/contact', hi: 'संपर्क' }
+                        ].map((item) => (
+                            <Link
+                                key={item.name}
+                                href={item.path}
+                                className="text-[#270611] hover:text-[#6B0E2A] transition-colors uppercase tracking-[0.18em] text-[11px] font-bold relative group py-1"
+                            >
+                                <span>{item.name}</span>
+                                <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-[#C5A059] to-[#6B0E2A] transition-all duration-300 group-hover:w-full"></span>
+                            </Link>
+                        ))}
+                    </nav>
+
+                    {/* Desktop CTA Buttons */}
+                    <div className="hidden lg:flex items-center gap-4">
+                        <Link
+                            href="/contact"
+                            className="inline-flex items-center gap-2 bg-[#6B0E2A] hover:bg-[#4E0A1E] text-[#FAF7F2] px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.22em] border border-[#C5A059]/40 transition-all duration-300 shadow-sm hover:shadow-md"
+                        >
+                            <Calendar size={13} className="text-[#C5A059]" />
+                            <span>Book Consultation</span>
+                        </Link>
+                    </div>
+
+                    {/* Quick Call Icon for Mobile */}
+                    <a 
+                        href="tel:+918881121119" 
+                        aria-label="Call Yash Jewellers"
+                        className="md:hidden text-[#6B0E2A] p-2 hover:bg-[#F3E8D0] rounded-full transition-colors"
+                    >
+                        <Phone size={20} />
+                    </a>
+
+                </div>
+            </div>
+
+            {/* Mobile Navigation Drawer */}
+            {isMenuOpen && (
+                <div className="fixed inset-0 z-50 flex">
+                    <div 
+                        className="fixed inset-0 bg-[#270611]/70 backdrop-blur-sm transition-opacity" 
+                        onClick={() => setIsMenuOpen(false)}
+                    />
+                    
+                    <div className="relative w-4/5 max-w-sm bg-[#FAF7F2] h-full shadow-2xl p-6 flex flex-col justify-between overflow-y-auto border-r border-[#C5A059]/40">
+                        <div>
+                            <div className="flex justify-between items-center pb-6 border-b border-[#C5A059]/30">
+                                <div>
+                                    <h2 className="font-serif text-xl font-normal text-[#270611] tracking-wider">
+                                        YASH <span className="text-gold-gradient font-bold">JEWELLERS</span>
+                                    </h2>
+                                    <p className="text-[10px] uppercase tracking-widest text-[#6B0E2A]">Estd. 1975 · Kanpur</p>
+                                </div>
+                                <button 
+                                    onClick={() => setIsMenuOpen(false)} 
+                                    className="text-[#270611] p-1 hover:text-[#6B0E2A]"
+                                >
+                                    <X size={24} />
+                                </button>
+                            </div>
+
+                            {/* Hindi Welcome */}
+                            <div className="my-5 p-3 bg-[#F3E8D0]/60 rounded-md border border-[#C5A059]/30 text-center">
+                                <p className="font-serif text-sm text-[#270611] italic">
+                                    "शुद्धता और विश्वास की आधी सदी"
+                                </p>
+                                <p className="text-[10px] text-[#6B0E2A] font-semibold mt-0.5 tracking-wider uppercase">
+                                    Kanpur Bullion Benchmark
+                                </p>
+                            </div>
+
+                            <nav className="flex flex-col gap-4 mt-6">
+                                {[
+                                    { name: 'Home', path: '/', hi: 'मुख्य पृष्ठ' },
+                                    { name: 'High Jewellery Catalogue', path: '/shop', hi: 'शाही आभूषण संग्रह' },
+                                    { name: 'Live Bullion Rates', path: '/rates', hi: 'लाइव सोने-चांदी के भाव' },
+                                    { name: 'Heritage & Craftsmanship', path: '/about', hi: 'हमारी विरासत एवं कला' },
+                                    { name: 'Bespoke Atelier & Store', path: '/contact', hi: 'स्टोर एवं निजी परामर्श' }
+                                ].map((item) => (
+                                    <Link
+                                        key={item.name}
+                                        href={item.path}
+                                        onClick={() => setIsMenuOpen(false)}
+                                        className="flex flex-col py-2 border-b border-[#C5A059]/15 text-[#270611] hover:text-[#6B0E2A] transition-colors"
+                                    >
+                                        <span className="text-xs uppercase tracking-widest font-bold">{item.name}</span>
+                                        <span className="text-[10px] text-[#8C6D38] font-serif">{item.hi}</span>
+                                    </Link>
+                                ))}
+                            </nav>
+                        </div>
+
+                        <div className="pt-6 border-t border-[#C5A059]/30 space-y-3">
+                            <a 
+                                href="https://wa.me/918881121119"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="w-full flex items-center justify-center gap-2 bg-[#6B0E2A] text-white py-3 rounded-none text-xs font-bold uppercase tracking-widest border border-[#C5A059]/40"
+                            >
+                                <MessageCircle size={16} className="text-[#C5A059]" />
+                                <span>WhatsApp Concierge</span>
+                            </a>
+                            <p className="text-center text-[10px] text-[#8C6D38]">
+                                307 Krishna Niwas, Yusuf Meherali Rd &amp; Kanpur
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            )}
+        </header>
+    );
+}

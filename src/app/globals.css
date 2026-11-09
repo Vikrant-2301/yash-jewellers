@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+:root {
+  --deep-burgundy: #270611;
+  --royal-maroon: #6B0E2A;
+  --royal-maroon-dark: #4A081C;
+  --antique-gold: #C5A059;
+  --antique-gold-light: #DFBE7A;
+  --antique-gold-dark: #9E7A36;
+  --champagne: #F3E8D0;
+  --champagne-light: #FAF3E6;
+  --ivory: #FAF7F2;
+  --ivory-pure: #FDFBF7;
+  
+  --foreground: #270611;
+  --background: #FAF7F2;
+}
+
+body {
+  background-color: #FAF7F2;
+  color: #270611;
+  font-family: 'Plus Jakarta Sans', 'Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+}
+
+::selection {
+  background-color: #6B0E2A;
+  color: #F3E8D0;
+}
+
+h1, h2, h3, h4, h5, h6, .font-serif {
+  font-family: 'Playfair Display', 'Cormorant Garamond', 'Cinzel', 'Georgia', serif;
+}
+
+/* Subtle Indian Heritage Jali Watermark Pattern */
+.bg-heritage-pattern {
+  background-image: 
+    radial-gradient(circle at center, rgba(197, 160, 89, 0.12) 1px, transparent 1px),
+    radial-gradient(circle at center, rgba(107, 14, 42, 0.04) 1px, transparent 1px);
+  background-size: 32px 32px, 16px 16px;
+  background-position: 0 0, 16px 16px;
+}
+
+/* Gold Gradient Utilities */
+.text-gold-gradient {
+  background: linear-gradient(135deg, #F5D79E 0%, #C5A059 50%, #9B732B 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.text-gold-bright {
+  background: linear-gradient(135deg, #FFF0D0 0%, #E8C882 50%, #C5A059 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.bg-gold-gradient {
+  background: linear-gradient(135deg, #ECC880 0%, #C5A059 50%, #9A7432 100%);
+}
+
+/* Ornamental Royal Divider with Indian Lotus / Diamond Motif */
+.ornament-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin: 1.5rem auto;
+}
+
+.ornament-divider::before,
+.ornament-divider::after {
+  content: '';
+  height: 1px;
+  width: 80px;
+  background: linear-gradient(to right, transparent, #C5A059);
+}
+
+.ornament-divider::after {
+  background: linear-gradient(to left, transparent, #C5A059);
+}
+
+/* Live Bullion Ticker Transitions */
+.rate-val {
+  color: #FFFFFF !important;
+  transition: all 0.35s ease;
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-variant-numeric: tabular-nums;
+}
+
+.rate-val.tick-up {
+  color: #10B981 !important;
+  background-color: rgba(16, 185, 129, 0.2) !important;
+  text-shadow: 0 0 8px rgba(16, 185, 129, 0.6);
+  transform: scale(1.05);
+}
+
+.rate-val.tick-down {
+  color: #EF4444 !important;
+  background-color: rgba(239, 68, 68, 0.2) !important;
+  text-shadow: 0 0 8px rgba(239, 68, 68, 0.6);
+  transform: scale(1.05);
+}
