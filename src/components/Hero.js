@@ -6,45 +6,65 @@ import { ArrowRight, Sparkles, ShieldCheck, TrendingUp, Calendar, ChevronRight, 
 
 const HERO_SLIDES = [
     {
-        id: "bridal",
-        tag: "Royal Bridal Suite · शाही दुल्हन",
-        headline: "A Legacy Cast in Gold.",
-        headlineAccent: "A Promise Forever.",
+        id: "banner-1",
+        tag: "Yash Jewellers · Chaubepur, Kanpur",
+        headline: "A Legacy Cast in Pure Gold.",
+        headlineAccent: "Fifty Years of Trust.",
         hindi: "पीढ़ियों का विश्वास, हर दुल्हन का राजसी श्रृंगार।",
-        description: "Handcrafted bridal choker sets, jadau rani haars, and 22K temple heirlooms woven with fifty years of unmatched artisanal trust in Kanpur.",
-        image: "https://images.unsplash.com/photo-1584302179602-e4c3d3fd629d?auto=format&fit=crop&w=2000&q=85",
+        description: "Explore 100% BIS Hallmarked (916 HUID) gold jewellery, authentic temple necklaces, and real-time live rates directly streaming from Sarafa Mandi.",
+        image: "/images/yash/carousel/20210520151949066869EMGe0/master.png",
         accent: "Bridal Masterpieces"
     },
     {
-        id: "kundan",
-        tag: "Imperial Polki & Jadau · कुंदन राजवाड़ा",
+        id: "banner-2",
+        tag: "Royal Heritage Suite · शाही आभूषण",
         headline: "Echoes of Royalty,",
-        headlineAccent: "Refined for Today.",
-        hindi: "राजपुताना नफासत और अनकट डायमंड की शाही चमक।",
-        description: "Intricately set uncut polki diamonds and vibrant meenakari enameling celebrating the splendour of Indian royal heritage.",
-        image: "https://images.unsplash.com/photo-1602752250055-567f4a127b14?auto=format&fit=crop&w=2000&q=85",
+        headlineAccent: "Crafted for Generations.",
+        hindi: "राजपुताना नफासत और अनकट कुंदन की शाही चमक।",
+        description: "Intricately crafted bridal choker sets, jadau rani haars, and 22K heirlooms created with unmatched artisanal precision in Kanpur.",
+        image: "/images/yash/carousel/20210507143711864251lah8a/master.jpeg",
         accent: "Polki Heritage"
     },
     {
-        id: "temple",
-        tag: "Divine 22K Temple Gold · दक्षिण व उत्तर कला",
-        headline: "Sculpted in Purity,",
+        id: "banner-3",
+        tag: "Pure Silver & Gold · शुद्ध चांदी व सोना",
+        headline: "Sculpted in Absolute Purity,",
         headlineAccent: "Sacred Traditions.",
-        hindi: "शुद्ध 916 हॉलमार्क सोने में देव-कला का साक्षात रूप।",
-        description: "Magnificent nakshi carvings, authentic temple deities, and heavy gold kadas built to be treasured across generations.",
-        image: "https://images.unsplash.com/photo-1630138235282-5202867e3dfd?auto=format&fit=crop&w=2000&q=85",
+        hindi: "शुद्ध 916 हॉलमार्क सोने एवं 99+ चांदी का संगम।",
+        description: "From lightweight daily-wear tops to heavy bridal necklaces and fine silver gift articles, every ornament carries our hallmark guarantee.",
+        image: "/images/yash/carousel/20210507143659484624db2M0/master.jpeg",
         accent: "Temple Gold"
+    },
+    {
+        id: "banner-4",
+        tag: "Handcrafted Elegance · हाथ की नक्काशी",
+        headline: "Timeless Indian Artistry,",
+        headlineAccent: "Every Occasion Celebrated.",
+        hindi: "उत्सव का उल्लास, यश ज्वेलर्स के साथ।",
+        description: "Customized bespoke jewellery handcrafted to perfection. Visit our showroom at Pipari Road, near Narsingh Mandir, Chaubepur, Kanpur.",
+        image: "/images/yash/carousel/20210507143656884657JZcJl/master.jpeg",
+        accent: "Festive Joy"
+    },
+    {
+        id: "banner-5",
+        tag: "Chaubepur Showroom · आपका अपना ज्वेलर्स",
+        headline: "Transparent Live Pricing,",
+        headlineAccent: "No Hidden Costs.",
+        hindi: "दैनिक लाइव भाव एवं पारदर्शी बिलिंग व्यवस्था।",
+        description: "Track live market gold and silver Cash Bhav daily with complete breakdown of net weight, making charges, and statutory GST.",
+        image: "/images/yash/carousel/20210507143418560944Z0cBm/master.png",
+        accent: "Live Rates"
     }
 ];
 
 export default function Hero() {
     const [activeSlide, setActiveSlide] = useState(0);
 
-    // Auto rotate slides every 8 seconds
+    // Auto rotate slides every 7 seconds
     useEffect(() => {
         const timer = setInterval(() => {
             setActiveSlide(prev => (prev + 1) % HERO_SLIDES.length);
-        }, 8000);
+        }, 7000);
         return () => clearInterval(timer);
     }, []);
 
@@ -68,8 +88,8 @@ export default function Hero() {
                         className="w-full h-full object-cover object-center"
                     />
                     {/* Multi-layered Royal Burgundy & Maroon Vignettes */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-[#270611]/98 via-[#270611]/75 to-[#270611]/30" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#270611] via-transparent to-[#270611]/40" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-[#270611]/98 via-[#270611]/80 to-[#270611]/40" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#270611] via-transparent to-[#270611]/50" />
                 </div>
             ))}
 
@@ -99,91 +119,80 @@ export default function Hero() {
                     {/* Editorial Main Headline */}
                     <h1 className="font-serif text-4xl sm:text-6xl md:text-7xl lg:text-[76px] font-normal leading-[1.08] tracking-tight text-[#FAF7F2]">
                         {slide.headline}
-                        <br />
-                        <span className="italic font-serif text-gold-gradient font-normal">
+                        <span className="block mt-1 font-serif italic text-gold-gradient font-normal">
                             {slide.headlineAccent}
                         </span>
                     </h1>
 
-                    {/* Hindi Poetic Proverb */}
-                    <p className="mt-5 font-serif text-lg sm:text-2xl text-[#EAD8B1] tracking-wide italic border-l-2 border-[#C5A059] pl-4">
-                        "{slide.hindi}"
+                    {/* Hindi Sub-headline */}
+                    <p className="mt-4 text-base sm:text-lg text-[#C5A059] font-serif italic tracking-wide">
+                        {slide.hindi}
                     </p>
 
-                    {/* Detailed Paragraph */}
-                    <p className="mt-4 max-w-xl text-sm md:text-base leading-relaxed text-[#FAF7F2]/80 font-sans">
+                    {/* Narrative Description */}
+                    <p className="mt-4 text-xs sm:text-sm md:text-base text-[#FAF7F2]/80 leading-relaxed font-sans max-w-2xl font-light">
                         {slide.description}
                     </p>
 
-                    {/* Call to Actions */}
-                    <div className="mt-8 flex flex-wrap items-center gap-4">
-                        <Link
-                            href="/shop"
-                            className="group inline-flex items-center gap-3 bg-gradient-to-r from-[#ECC880] via-[#C5A059] to-[#9A7432] text-[#270611] px-7 py-3.5 text-xs font-bold uppercase tracking-[0.2em] transition-all duration-300 hover:shadow-[0_0_25px_rgba(197,160,89,0.5)] hover:scale-[1.02]"
+                    {/* CTA Action Buttons */}
+                    <div className="mt-10 flex flex-wrap items-center gap-4">
+                        <Link 
+                            href="/shop" 
+                            className="bg-gradient-to-r from-[#ECC880] via-[#C5A059] to-[#8C6D38] text-[#270611] font-bold text-xs uppercase tracking-[0.25em] px-8 py-4 rounded-none hover:shadow-[0_0_30px_rgba(197,160,89,0.4)] transition-all duration-300 flex items-center gap-3 group"
                         >
-                            <span>Explore Masterpieces</span>
-                            <ArrowRight size={15} className="transition-transform group-hover:translate-x-1" />
+                            <span>Explore Catalogue</span>
+                            <ArrowRight size={15} className="group-hover:translate-x-1.5 transition-transform" />
                         </Link>
 
-                        <Link
-                            href="/rates"
-                            className="inline-flex items-center gap-2.5 bg-[#3C081A]/80 hover:bg-[#6B0E2A] text-[#FAF7F2] border border-[#C5A059]/50 px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] transition-all duration-300 backdrop-blur-sm"
+                        <Link 
+                            href="/rates" 
+                            className="border border-[#C5A059]/60 text-[#FAF7F2] font-semibold text-xs uppercase tracking-[0.25em] px-8 py-4 rounded-none hover:bg-[#FAF7F2]/10 hover:border-[#DFBE7A] transition-all duration-300 flex items-center gap-2"
                         >
-                            <TrendingUp size={14} className="text-[#C5A059]" />
-                            <span>Live Gold Rates</span>
+                            <TrendingUp size={15} className="text-[#C5A059]" />
+                            <span>Live Rates (Bhav)</span>
                         </Link>
                     </div>
 
                 </div>
 
-                {/* Bottom Bar: Trust Badges & Slide Navigation */}
-                <div className="pt-12 mt-12 border-t border-[#C5A059]/25 flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                {/* Bottom Trust Indicators & Slide Selectors */}
+                <div className="pt-12 border-t border-[#C5A059]/25 flex flex-col md:flex-row md:items-center justify-between gap-6">
                     
-                    {/* Heritage Trust Badges */}
-                    <div className="flex flex-wrap items-center gap-6 sm:gap-10 text-[#EAD8B1]">
-                        <div>
-                            <p className="font-serif text-2xl text-gold-gradient font-bold">1975</p>
-                            <p className="text-[9px] uppercase tracking-[0.25em] text-[#FAF7F2]/60">Kanpur Heritage</p>
+                    {/* Three Pillars of Trust */}
+                    <div className="flex flex-wrap items-center gap-6 md:gap-10 text-xs text-[#FAF7F2]/85">
+                        <div className="flex items-center gap-2.5">
+                            <ShieldCheck size={16} className="text-[#C5A059]" />
+                            <span className="tracking-wider">100% BIS Hallmarked (916 HUID)</span>
                         </div>
-                        <div className="h-8 w-px bg-[#C5A059]/30" />
-                        <div>
-                            <p className="font-serif text-2xl text-gold-gradient font-bold">100%</p>
-                            <p className="text-[9px] uppercase tracking-[0.25em] text-[#FAF7F2]/60">BIS 916 Hallmark</p>
+                        <div className="flex items-center gap-2.5">
+                            <Award size={16} className="text-[#C5A059]" />
+                            <span className="tracking-wider">Sarafa Mandi Live Cash Bhav</span>
                         </div>
-                        <div className="h-8 w-px bg-[#C5A059]/30" />
-                        <div>
-                            <p className="font-serif text-2xl text-gold-gradient font-bold">IGI / SGL</p>
-                            <p className="text-[9px] uppercase tracking-[0.25em] text-[#FAF7F2]/60">Certified Diamonds</p>
-                        </div>
-                        <div className="h-8 w-px bg-[#C5A059]/30 hidden sm:block" />
-                        <div className="hidden sm:block">
-                            <p className="font-serif text-2xl text-gold-gradient font-bold">₹0</p>
-                            <p className="text-[9px] uppercase tracking-[0.25em] text-[#FAF7F2]/60">Hidden Charges</p>
+                        <div className="flex items-center gap-2.5">
+                            <Sparkles size={16} className="text-[#C5A059]" />
+                            <span className="tracking-wider">Chaubepur, Kanpur Showroom</span>
                         </div>
                     </div>
 
-                    {/* Interactive Slide Switcher */}
-                    <div className="flex items-center gap-2">
-                        {HERO_SLIDES.map((s, idx) => (
+                    {/* Interactive Slide Dots */}
+                    <div className="flex items-center gap-3">
+                        {HERO_SLIDES.map((_, i) => (
                             <button
-                                key={s.id}
-                                onClick={() => setActiveSlide(idx)}
-                                aria-label={`Select Slide ${idx + 1}`}
-                                className={`px-3 py-1.5 text-[10px] uppercase tracking-wider font-semibold border transition-all duration-300 ${
-                                    idx === activeSlide
-                                        ? "bg-[#C5A059] text-[#270611] border-[#C5A059] shadow-sm font-bold"
-                                        : "bg-[#270611]/60 text-[#FAF7F2]/60 border-[#C5A059]/30 hover:border-[#C5A059] hover:text-[#FAF7F2]"
+                                key={i}
+                                onClick={() => setActiveSlide(i)}
+                                aria-label={`Go to slide ${i + 1}`}
+                                className={`transition-all duration-300 h-1 rounded-none ${
+                                    i === activeSlide 
+                                        ? "w-10 bg-[#C5A059]" 
+                                        : "w-4 bg-[#FAF7F2]/30 hover:bg-[#FAF7F2]/60"
                                 }`}
-                            >
-                                0{idx + 1} {s.accent.split(" ")[0]}
-                            </button>
+                            />
                         ))}
                     </div>
 
                 </div>
 
             </div>
-
         </section>
     );
 }

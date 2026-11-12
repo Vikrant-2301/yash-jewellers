@@ -5,133 +5,136 @@ import Hero from "../components/Hero";
 import ProductCard from "../components/ProductCard";
 import RateCard from "../components/RateCard";
 import AtelierBookingModal from "../components/AtelierBookingModal";
+import CustomDesignModal from "../components/CustomDesignModal";
 import Link from 'next/link';
 import { BUSINESS_DETAILS } from "@/src/config/business";
 import { 
     ArrowRight, 
     ShieldCheck, 
     Gem, 
-    Truck, 
     Clock, 
     Sparkles, 
     Award, 
-    Compass, 
-    Calendar, 
-    MessageCircle, 
     Check, 
-    Star 
+    Star,
+    Camera,
+    UploadCloud,
+    MessageCircle,
+    SlidersHorizontal,
+    Sparkle
 } from 'lucide-react';
 
-// Curated Royal Categories
+// Authentic Yash Jewellers Catalogue Categories mapped to downloaded photos
 const CATEGORIES = [
     { 
-        id: 'bridal', 
-        name: 'Bridal Suite', 
-        hindi: 'दुल्हन का संपूर्ण श्रृंगार',
-        desc: 'Majestic chokers, rani haars, maang tikkas, and naths crafted for your once-in-a-lifetime day.',
-        image: 'https://images.unsplash.com/photo-1595357906976-a0772278cb78?auto=format&fit=crop&q=80&w=600',
+        id: 'haar-set', 
+        name: 'Haar Set Collection', 
+        hindi: 'शाही हार सेट संग्रह',
+        desc: 'Majestic bridal chokers, rani haars, kundan necklaces, and temple sets handcrafted in 22K 916 gold.',
+        image: '/images/yash/pages/114497/haar-set_1621611750cU7ML9.jpeg',
         link: '/shop?category=Haar%20Set'
     },
     { 
-        id: 'kundan', 
-        name: 'Polki & Kundan', 
-        hindi: 'शाही कुंदन एवं जड़ाऊ',
-        desc: 'Uncut diamond polki set in pure 22K gold foil with traditional Rajasthani and Bikaneri meenakari.',
-        image: 'https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=600',
-        link: '/shop?category=Haar%20Set'
+        id: 'ladies-rings', 
+        name: 'Ladies Rings Design', 
+        hindi: 'लेडीज रिंग्स डिज़ाइन',
+        desc: 'Delicate floral, gemstone, and filigree gold rings for women in certified 22K 916 hallmarked gold.',
+        image: '/images/yash/pages/115402/ladies-rin_162209013039gV52.jpeg',
+        link: '/shop?category=Ladies%20Rings%20Design'
     },
     { 
-        id: 'temple', 
-        name: 'Temple Gold', 
-        hindi: 'देव-कला मंदिर आभूषण',
-        desc: 'Sacred nakshi carvings representing Lakshmi, peacock, and floral motifs handcrafted in 22K gold.',
-        image: 'https://images.unsplash.com/photo-1630138235282-5202867e3dfd?auto=format&fit=crop&q=80&w=600',
-        link: '/shop?category=Haar%20Set'
-    },
-    { 
-        id: 'bangles', 
-        name: 'Kangans & Bangles', 
-        hindi: 'शाही कंगन व चूड़ियां',
-        desc: 'Heavy traditional kada sets, filigree cuffs, and timeless daily-wear bangles with hallmarked guarantee.',
-        image: 'https://images.unsplash.com/photo-1596906263051-93c4c9693994?auto=format&fit=crop&q=80&w=600',
+        id: 'bracelets', 
+        name: 'Bracelets Collection', 
+        hindi: 'सोने के ब्रेसलेट्स संग्रह',
+        desc: 'Designer kada-style, sleek Italian mesh, and contemporary wrist bracelets in pure 22K gold.',
+        image: '/images/yash/pages/115773/brackets_16222892941sZ3wG.jpeg',
         link: '/shop?category=Bracelets'
     },
     { 
-        id: 'diamond', 
-        name: 'Diamond Solitaires', 
-        hindi: 'सॉलिटेयर हीरे व अंगूठी',
-        desc: 'IGI & SGL certified natural diamonds set in 18K rose, white, and yellow gold.',
-        image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=600',
-        link: '/shop?category=Ladies%20Ring'
+        id: 'chains', 
+        name: 'Chains Design', 
+        hindi: 'सोने की चेन डिज़ाइन',
+        desc: 'Classic rope, curb, box, hollow, and solid 22K gold chain designs crafted with utmost precision.',
+        image: '/images/yash/pages/115436/chains-des_16221057465n2S8b.jpeg',
+        link: '/shop?category=Chains%20Design'
     },
     { 
-        id: 'mangal', 
-        name: 'Mangalsutras', 
-        hindi: 'पवित्र मंगलसूत्र संग्रह',
-        desc: 'Traditional black-beaded sacred chains re-imagined with modern diamond drops and gold motifs.',
-        image: 'https://images.unsplash.com/photo-1601121141461-9d6647bca1ed?auto=format&fit=crop&q=80&w=600',
-        link: '/shop?category=Chains'
+        id: 'gents-rings', 
+        name: 'Gents Ring Design', 
+        hindi: 'जेंट्स रिंग डिज़ाइन',
+        desc: 'Bold signet rings, textured bands, and traditional gemstone-ready 22K gold rings for men.',
+        image: '/images/yash/pages/115404/gents-ring_1622106809h7grSw.jpeg',
+        link: '/shop?category=Gents%20Ring%20Design'
+    },
+    { 
+        id: 'silver', 
+        name: 'Pure Silver & Payal', 
+        hindi: 'शुद्ध चांदी आभूषण व बर्तन',
+        desc: 'Certified 99+ silver payal, bichhiya, pooja thalis, and auspicious silver giftware.',
+        image: '/images/yash/updates/767116/silver-pri_1622829552yGdBcV.jpeg',
+        link: '/shop?category=Silver'
     }
 ];
 
-// Featured Masterpiece Jewellery
+// Featured Masterpiece Jewellery from Yash Jewellers Inventory
 const FEATURED_PRODUCTS = [
     {
-        id: 1,
-        title: "The Rajwada Imperial Kundan Choker",
-        hindiTitle: "राजवाड़ा कुंदन चोकर सेट",
-        price: "4,45,000",
-        category: "Bridal Suite",
+        id: 205,
+        title: "Kundan Polki Grand Bridal Haar Set",
+        hindiTitle: "शाही कुंदन पोलकी ब्राइडल हार",
+        price: "7,85,000",
+        category: "Haar Set",
         purity: "22K 916 Hallmark",
-        weight: "58.40g",
-        making: "10%",
-        image: "https://images.unsplash.com/photo-1602752250055-567f4a127b14?auto=format&fit=crop&q=80&w=700",
-        tag: "Royal Heritage",
-        description: "Adorned with natural untreated polki slices, Zambian emerald drops, and intricate peacock meenakari on the reverse."
+        weight: "61.20g",
+        making: "11%",
+        image: "/images/yash/pages/114497/haar-set_1621611750cU7ML9.jpeg",
+        tag: "Royal Masterpiece",
+        description: "High-jewellery bridal haar featuring uncut kundan stones, emerald drops, and fine 22K gold foil setting."
     },
     {
-        id: 2,
-        title: "Padmavati Temple Gold Rani Haar",
-        hindiTitle: "पद्मावती मंदिर नक्काशी रानी हार",
-        price: "3,85,000",
-        category: "Temple Gold",
+        id: 221,
+        title: "Floral Filigree 22K Ladies Gold Ring",
+        hindiTitle: "फ्लोरल नक्काशी लेडीज रिंग",
+        price: "56,000",
+        category: "Ladies Rings Design",
         purity: "22K 916 Hallmark",
-        weight: "48.20g",
-        making: "9%",
-        image: "https://images.unsplash.com/photo-1630138235282-5202867e3dfd?auto=format&fit=crop&q=80&w=700",
-        tag: "Hand Carved",
-        description: "Heavy south-Indian nakshi artwork featuring Goddess Lakshmi surrounded by divine temple archwork and hanging pearls."
+        weight: "4.35g",
+        making: "8%",
+        image: "/images/yash/pages/115402/ladies-rin_162209013039gV52.jpeg",
+        tag: "Bestseller Ring",
+        description: "Delicate openwork floral ring in 22K gold featuring laser-cut petals and high-gloss center polish."
     },
     {
-        id: 3,
-        title: "Flawless Solitaire Promise Ring",
-        hindiTitle: "सॉलिटेयर डायमंड रिंग",
-        price: "1,25,000",
-        category: "Diamond",
-        purity: "18K Gold · VVS-EF",
-        weight: "4.80g",
-        making: "Included",
-        image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&q=80&w=700",
-        tag: "IGI Certified",
-        description: "1.02 Carat brilliant cut solitaire diamond certified by IGI, set in an 18K yellow gold tapered shank with micro-pave accents."
+        id: 231,
+        title: "Classic 22K Hallmarked Gold Chain",
+        hindiTitle: "क्लासिक 22K हॉलमार्क गोल्ड चेन",
+        price: "1,55,000",
+        category: "Chains Design",
+        purity: "22K 916 Hallmark",
+        weight: "12.00g",
+        making: "8.5%",
+        image: "/images/yash/pages/115436/chains-des_16221057465n2S8b.jpeg",
+        tag: "Daily Elegance",
+        description: "Pure 22K 916 hallmarked solid rope gold chain with interlocking links and heavy-duty locking clasp."
     },
     {
-        id: 4,
-        title: "Filigree Antique Royal Kangan Pair",
-        hindiTitle: "पारंपरिक जालीदार सोने के कंगन",
-        price: "2,10,000",
+        id: 241,
+        title: "Royal Italian Mesh 22K Gold Bracelet",
+        hindiTitle: "रॉयल 22K मेश गोल्ड ब्रेसलेट",
+        price: "2,15,000",
         category: "Bracelets",
         purity: "22K 916 Hallmark",
-        weight: "32.00g",
-        making: "8%",
-        image: "https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&q=80&w=700",
-        tag: "Bestseller",
-        description: "A pair of regal bangles featuring pure gold wire-mesh filigree work and screw-closure designed for effortless regal comfort."
+        weight: "16.50g",
+        making: "9%",
+        image: "/images/yash/pages/115773/brackets_16222892941sZ3wG.jpeg",
+        tag: "Royal Bracelet",
+        description: "Intricately woven gold mesh wrist bracelet with secure side-lock mechanism and polished edge borders."
     }
 ];
 
 export default function Home() {
     const [isBookingOpen, setIsBookingOpen] = useState(false);
+    const [isCustomDesignOpen, setIsCustomDesignOpen] = useState(false);
     const [selectedTab, setSelectedTab] = useState("All");
 
     const filteredList = selectedTab === "All"
@@ -158,26 +161,26 @@ export default function Home() {
 
                         <div className="flex flex-col items-center gap-2 group">
                             <div className="w-12 h-12 rounded-full bg-[#3C081A] flex items-center justify-center border border-[#C5A059]/40 group-hover:border-[#C5A059] transition-colors">
-                                <Gem className="w-6 h-6 text-[#DFBE7A]" />
+                                <Award className="w-6 h-6 text-[#DFBE7A]" />
                             </div>
-                            <h3 className="font-serif text-sm md:text-base font-semibold text-[#FAF7F2]">Natural Diamonds</h3>
-                            <p className="text-[10px] text-[#EAD8B1]/70 tracking-wider">IGI / SGL Certified Stones</p>
+                            <h3 className="font-serif text-sm md:text-base font-semibold text-[#FAF7F2]">Sarafa Mandi Live Bhav</h3>
+                            <p className="text-[10px] text-[#EAD8B1]/70 tracking-wider">Transparent Daily Mandi Rate</p>
                         </div>
 
                         <div className="flex flex-col items-center gap-2 group">
                             <div className="w-12 h-12 rounded-full bg-[#3C081A] flex items-center justify-center border border-[#C5A059]/40 group-hover:border-[#C5A059] transition-colors">
-                                <Award className="w-6 h-6 text-[#DFBE7A]" />
+                                <Gem className="w-6 h-6 text-[#DFBE7A]" />
                             </div>
                             <h3 className="font-serif text-sm md:text-base font-semibold text-[#FAF7F2]">100% Purity Guarantee</h3>
-                            <p className="text-[10px] text-[#EAD8B1]/70 tracking-wider">HUID Laser Certified 916 Gold</p>
+                            <p className="text-[10px] text-[#EAD8B1]/70 tracking-wider">Zero Adulteration Assurance</p>
                         </div>
 
                         <div className="flex flex-col items-center gap-2 group">
                             <div className="w-12 h-12 rounded-full bg-[#3C081A] flex items-center justify-center border border-[#C5A059]/40 group-hover:border-[#C5A059] transition-colors">
                                 <Clock className="w-6 h-6 text-[#DFBE7A]" />
                             </div>
-                            <h3 className="font-serif text-sm md:text-base font-semibold text-[#FAF7F2]">Lifetime Exchange</h3>
-                            <p className="text-[10px] text-[#EAD8B1]/70 tracking-wider">Complete Purity Buyback</p>
+                            <h3 className="font-serif text-sm md:text-base font-semibold text-[#FAF7F2]">Chaubepur Showroom</h3>
+                            <p className="text-[10px] text-[#EAD8B1]/70 tracking-wider">Pipari Road, Near Narsingh Mandir</p>
                         </div>
                     </div>
                 </div>
@@ -191,16 +194,16 @@ export default function Home() {
                     <div className="text-center max-w-2xl mx-auto mb-10">
                         <div className="inline-flex items-center gap-2 text-[#C5A059] text-[10px] uppercase font-bold tracking-[0.3em] mb-2">
                             <Sparkles size={13} className="text-[#DFBE7A]" />
-                            <span>Real-Time Market Benchmark · आज का सोना भाव</span>
+                            <span>Sarafa Mandi Live Streaming · आज का सोना एवं चांदी भाव</span>
                         </div>
                         <h2 className="font-serif text-3xl md:text-5xl text-[#FAF7F2] font-normal">
-                            Live Gold Rates
+                            Live Gold &amp; Silver Cash Bhav
                         </h2>
                         <div className="ornament-divider">
                             <span className="w-2 h-2 rotate-45 bg-[#C5A059]"></span>
                         </div>
                         <p className="text-xs md:text-sm text-[#EAD8B1]/80 leading-relaxed">
-                            Transparent landed gold and silver rates streaming live in real-time. Conforming directly to 22K BIS Hallmarked jewellery standards.
+                            Transparent landed gold and silver rates streaming live in real-time. 100% retail jewellery focus with live price calculation formula.
                         </p>
                     </div>
 
@@ -288,7 +291,7 @@ export default function Home() {
                     
                     <div className="text-center max-w-2xl mx-auto mb-12">
                         <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#6B0E2A]">
-                            High Jewellery Showcase · सर्वश्रेष्ठ कारीगरी
+                            Showroom Original Masterpieces · सर्वश्रेष्ठ कारीगरी
                         </span>
                         <h2 className="font-serif text-3xl md:text-5xl text-[#270611] mt-2 font-normal">
                             Signature Masterpieces
@@ -297,7 +300,7 @@ export default function Home() {
                             <span className="w-2 h-2 rotate-45 bg-[#C5A059]"></span>
                         </div>
                         <p className="text-xs md:text-sm text-gray-600">
-                            Each design is an exclusive limited creation, accompanied by an authenticated BIS Hallmark Certificate and laser-engraved HUID number.
+                            Each design is photographed directly from our showroom inventory, certified with a 100% BIS Hallmark laser HUID.
                         </p>
                     </div>
 
@@ -312,7 +315,7 @@ export default function Home() {
                             href="/shop"
                             className="inline-flex items-center gap-3 bg-[#6B0E2A] hover:bg-[#4E0A1E] text-white px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] border border-[#C5A059]/40 transition-all duration-300 shadow-md"
                         >
-                            <span>Explore Complete High Jewellery</span>
+                            <span>Explore Complete Showroom Catalogue</span>
                             <ArrowRight size={14} className="text-[#C5A059]" />
                         </Link>
                     </div>
@@ -320,7 +323,128 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* 6. Heritage & Artisanal Karigar Tribute (हमारी विरासत · 1975 से) */}
+            {/* 5B. Custom Jewellery Design & Karigari Showcase (मनपसंद डिज़ाइन अपने वजन में बनवाएं) */}
+            <section id="custom-design" className="py-20 md:py-28 bg-[#FAF7F2] relative overflow-hidden border-b border-[#C5A059]/25">
+                <div className="container mx-auto px-4 md:px-8">
+                    <div className="bg-[#270611] text-[#FAF7F2] border-2 border-[#C5A059]/50 shadow-2xl relative overflow-hidden p-8 md:p-14 lg:p-16">
+                        
+                        {/* Decorative Corner Ornaments */}
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#C5A059]/20 to-transparent pointer-events-none" />
+                        <div className="absolute bottom-0 left-0 w-32 h-32 bg-gradient-to-tr from-[#C5A059]/20 to-transparent pointer-events-none" />
+
+                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10">
+                            
+                            {/* Left Text & Pitch */}
+                            <div className="lg:col-span-7 space-y-5">
+                                <div className="inline-flex items-center gap-2 bg-[#3C081A] px-3.5 py-1.5 border border-[#C5A059]/50 text-[#DFBE7A] text-[10px] font-bold uppercase tracking-[0.25em]">
+                                    <Sparkles size={13} className="text-[#C5A059]" />
+                                    <span>Bespoke Karigari · कस्टम जेवर निर्माण</span>
+                                </div>
+
+                                <h2 className="font-serif text-3xl md:text-5xl text-white font-normal leading-tight">
+                                    Send Any Jewellery Photo,
+                                    <br />
+                                    <span className="font-serif italic text-gold-gradient font-normal">
+                                        We Craft It In Your Desired Weight.
+                                    </span>
+                                </h2>
+
+                                <p className="font-serif text-sm md:text-base text-[#EAD8B1] italic">
+                                    "आप जो भी डिज़ाइन इंटरनेट या शादी में पसंद करेंगे — हमारे कारीगर उसे आपके मनपसंद वजन और बजट में हूबहू तैयार करेंगे।"
+                                </p>
+
+                                <p className="text-xs md:text-sm text-[#FAF7F2]/80 leading-relaxed font-sans">
+                                    Saw an exquisite bridal haar, sleek rope chain, Italian bracelet, or designer ring on Pinterest or Instagram? Simply send us the screenshot or photo. Choose your preferred metal weight (e.g. 5g, 12g, 25g, 50g) and purity (22K 916 Hallmark or 18K), and our master goldsmiths in Chaubepur will craft it with 100% BIS Hallmarking.
+                                </p>
+
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                                    <div className="flex items-center gap-2.5 bg-[#3C081A]/60 p-2.5 border border-[#C5A059]/20 text-xs">
+                                        <Camera size={16} className="text-[#DFBE7A] shrink-0" />
+                                        <span>Upload Any Photo or Sketch</span>
+                                    </div>
+                                    <div className="flex items-center gap-2.5 bg-[#3C081A]/60 p-2.5 border border-[#C5A059]/20 text-xs">
+                                        <SlidersHorizontal size={16} className="text-[#DFBE7A] shrink-0" />
+                                        <span>Your Target Weight &amp; Budget</span>
+                                    </div>
+                                    <div className="flex items-center gap-2.5 bg-[#3C081A]/60 p-2.5 border border-[#C5A059]/20 text-xs">
+                                        <ShieldCheck size={16} className="text-[#DFBE7A] shrink-0" />
+                                        <span>100% BIS Hallmarked (916 HUID)</span>
+                                    </div>
+                                    <div className="flex items-center gap-2.5 bg-[#3C081A]/60 p-2.5 border border-[#C5A059]/20 text-xs">
+                                        <Sparkles size={16} className="text-[#DFBE7A] shrink-0" />
+                                        <span>Instant WhatsApp Estimate</span>
+                                    </div>
+                                </div>
+
+                                <div className="pt-4 flex flex-wrap gap-4 items-center">
+                                    <button
+                                        onClick={() => setIsCustomDesignOpen(true)}
+                                        className="bg-gradient-to-r from-[#ECC880] to-[#C5A059] text-[#270611] font-bold text-xs uppercase tracking-[0.2em] px-8 py-4 hover:shadow-xl transition-all flex items-center gap-2.5 shadow-lg group cursor-pointer"
+                                    >
+                                        <Camera size={16} className="group-hover:scale-110 transition-transform" />
+                                        <span>Send Design Photo · फोटो भेजें</span>
+                                        <ArrowRight size={14} />
+                                    </button>
+
+                                    <a
+                                        href={`https://wa.me/${BUSINESS_DETAILS.whatsappClean}?text=${encodeURIComponent('नमस्ते यश ज्वेलर्स! मेरे पास एक ज्वेलरी डिज़ाइन की फोटो है जिसे मुझे अपने वजन और बजट में बनवाना है।')}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="border border-[#C5A059] text-[#EAD8B1] hover:bg-[#C5A059]/10 px-6 py-4 text-xs font-semibold uppercase tracking-[0.18em] transition-colors flex items-center gap-2"
+                                    >
+                                        <MessageCircle size={15} className="text-[#25D366]" />
+                                        <span>WhatsApp Inquiry</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            {/* Right Visual Card */}
+                            <div className="lg:col-span-5 flex flex-col gap-4">
+                                <div className="relative border-2 border-[#C5A059] shadow-xl overflow-hidden group">
+                                    <div className="aspect-[4/3] bg-black/40 overflow-hidden">
+                                        <img
+                                            src="/images/yash/pages/114497/haar-set_1621611944gr5wqq.jpeg"
+                                            alt="Custom Jewellery Crafting Yash Jewellers"
+                                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                        />
+                                    </div>
+                                    <div className="absolute inset-0 bg-gradient-to-t from-[#270611] via-transparent to-transparent" />
+                                    <div className="absolute bottom-4 left-4 right-4 bg-[#270611]/90 backdrop-blur-sm p-4 border border-[#C5A059]/40">
+                                        <div className="flex justify-between items-center text-[10px] text-[#C5A059] font-bold uppercase tracking-widest mb-1">
+                                            <span>Custom Karigari Sample</span>
+                                            <span>100% 916 Gold</span>
+                                        </div>
+                                        <p className="font-serif text-sm text-white">
+                                            Crafted as per customer photo in 38.5 grams
+                                        </p>
+                                        <p className="text-[11px] text-[#EAD8B1]/75 mt-0.5">
+                                            Client selected weight &amp; BIS 916 Hallmark certification
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <div className="grid grid-cols-3 gap-2.5">
+                                    <div className="border border-[#C5A059]/30 p-3 bg-[#3C081A]/50 text-center">
+                                        <span className="block font-serif text-lg text-[#ECC880] font-bold">1. Photo</span>
+                                        <span className="text-[10px] text-[#FAF7F2]/70">Send image</span>
+                                    </div>
+                                    <div className="border border-[#C5A059]/30 p-3 bg-[#3C081A]/50 text-center">
+                                        <span className="block font-serif text-lg text-[#ECC880] font-bold">2. Weight</span>
+                                        <span className="text-[10px] text-[#FAF7F2]/70">Choose grams</span>
+                                    </div>
+                                    <div className="border border-[#C5A059]/30 p-3 bg-[#3C081A]/50 text-center">
+                                        <span className="block font-serif text-lg text-[#ECC880] font-bold">3. Craft</span>
+                                        <span className="text-[10px] text-[#FAF7F2]/70">BIS Hallmarked</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* 6. Heritage & Artisanal Karigar Tribute (हमारी विरासत · चौबेपुर, कानपुर) */}
             <section className="py-20 md:py-28 bg-[#270611] text-[#FAF7F2] relative">
                 <div className="container mx-auto px-4 md:px-8">
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
@@ -329,8 +453,8 @@ export default function Home() {
                         <div className="relative">
                             <div className="relative aspect-[4/5] border border-[#C5A059]/40 overflow-hidden shadow-2xl">
                                 <img
-                                    src="https://images.unsplash.com/photo-1617038220319-276d3cfab638?auto=format&fit=crop&w=1200&q=85"
-                                    alt="Crafting Yash Jewellers heritage gold"
+                                    src="/images/yash/updates/741561/yash-jewel_1621504828rfZ4Fq.png"
+                                    alt="Yash Jewellers showroom Chaubepur Kanpur"
                                     className="w-full h-full object-cover"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-[#270611]/80 via-transparent to-transparent" />
@@ -363,11 +487,11 @@ export default function Home() {
                             </h2>
 
                             <p className="text-xs md:text-sm text-[#FAF7F2]/80 leading-relaxed font-sans">
-                                Established in 1975, Yash Jewellers began with a singular promise: to bring unadulterated purity and timeless aesthetic mastery to families celebrating life’s greatest milestones.
+                                Established with a singular promise in Chaubepur, Kanpur: to provide unadulterated purity, transparent pricing, and timeless aesthetic mastery to families celebrating life’s greatest milestones.
                             </p>
 
                             <p className="text-xs md:text-sm text-[#FAF7F2]/80 leading-relaxed font-sans">
-                                Our master karigars from Kanpur and Varanasi still employ time-honoured techniques — hand-beaten gold, delicate filigree, and authentic kundan setting — married seamlessly with cutting-edge German laser hallmarking technology.
+                                Every piece of jewellery in our showroom carries a 100% BIS Hallmarked (916 HUID) laser engraving. We follow direct mandi parity rates with full transparency on net gold weight, making charges, and statutory GST.
                             </p>
 
                             <div className="grid grid-cols-2 gap-4 pt-4 border-t border-[#C5A059]/30 text-xs">
@@ -382,8 +506,8 @@ export default function Home() {
                                 <div className="flex items-start gap-2.5">
                                     <Check size={16} className="text-[#C5A059] shrink-0 mt-0.5" />
                                     <div>
-                                        <p className="font-bold text-[#FAF7F2]">Direct Gold Parity</p>
-                                        <p className="text-[#EAD8B1]/60 text-[11px]">Benchmark landed rate integration</p>
+                                        <p className="font-bold text-[#FAF7F2]">Sarafa Mandi Live Bhav</p>
+                                        <p className="text-[#EAD8B1]/60 text-[11px]">Official market cash benchmark</p>
                                     </div>
                                 </div>
 
@@ -391,15 +515,15 @@ export default function Home() {
                                     <Check size={16} className="text-[#C5A059] shrink-0 mt-0.5" />
                                     <div>
                                         <p className="font-bold text-[#FAF7F2]">Bespoke Customization</p>
-                                        <p className="text-[#EAD8B1]/60 text-[11px]">Bring your bridal dreams to life</p>
+                                        <p className="text-[#EAD8B1]/60 text-[11px]">Handcrafted to your design</p>
                                     </div>
                                 </div>
 
                                 <div className="flex items-start gap-2.5">
                                     <Check size={16} className="text-[#C5A059] shrink-0 mt-0.5" />
                                     <div>
-                                        <p className="font-bold text-[#FAF7F2]">Lifetime Value</p>
-                                        <p className="text-[#EAD8B1]/60 text-[11px]">Guaranteed gold buyback policy</p>
+                                        <p className="font-bold text-[#FAF7F2]">Lifetime Trust</p>
+                                        <p className="text-[#EAD8B1]/60 text-[11px]">Guaranteed purity buyback</p>
                                     </div>
                                 </div>
                             </div>
@@ -512,20 +636,20 @@ export default function Home() {
                             {
                                 quote: "Yash Jewellers crafted my complete wedding bridal set. The karigari on the Kundan choker was unmatched, and their live gold rate calculation was 100% transparent.",
                                 name: "Aaradhya Gupta",
-                                location: "Civil Lines, Kanpur",
+                                location: "Chaubepur, Kanpur",
                                 occasion: "Bridal Suite Customer"
                             },
                             {
-                                quote: "Our family has trusted Yash Jewellers since my grandfather's time. We always check their live rate board before making gold purchases in UP.",
+                                quote: "Our family has trusted Yash Jewellers for years. We always check their live rate board before making gold purchases in Kanpur.",
                                 name: "Rajeshwar Mehrotra",
-                                location: "Swaroop Nagar, Kanpur",
-                                occasion: "Patron Since 1988"
+                                location: "Kanpur Nagar",
+                                occasion: "Regular Patron"
                             },
                             {
-                                quote: "The IGI certified solitaire ring I bought for our anniversary had spectacular brilliance. Excellent private viewing lounge experience.",
+                                quote: "The floral gold ring and jhumkas were stunning and 100% hallmarked. Very respectful and honest billing.",
                                 name: "Sneha & Vivek Singhal",
-                                location: "Delhi NCR",
-                                occasion: "Solitaire Collection"
+                                location: "UP",
+                                occasion: "Jewellery Collection"
                             }
                         ].map((review, idx) => (
                             <div key={idx} className="bg-white p-6 md:p-8 border border-[#C5A059]/25 shadow-sm flex flex-col justify-between">
@@ -555,33 +679,32 @@ export default function Home() {
                 
                 <div className="relative z-10 max-w-3xl mx-auto">
                     <span className="text-[10px] font-bold uppercase tracking-[0.35em] text-[#C5A059]">
-                        Bespoke Consultation · शाही आतिथ्य
+                        Bespoke Consultation · चौबेपुर शोरूम
                     </span>
 
                     <h2 className="mt-4 font-serif text-3xl md:text-5xl text-[#FAF7F2] leading-tight">
-                        Experience Yash Jewellers in Person
+                        Visit Yash Jewellers Showroom
                     </h2>
 
                     <p className="mt-4 text-xs md:text-sm text-[#EAD8B1]/80 max-w-xl mx-auto leading-relaxed">
-                        Step into our private VIP lounge in Kanpur or book a virtual video viewing. Let our senior jewellery curators guide your heirloom selection.
+                        पिपरी रोड, नरसिंह मंदिर के पास, चौबेपुर, कानपुर नगर, उत्तर प्रदेश - 209203
                     </p>
 
                     <div className="mt-8 flex flex-wrap justify-center gap-4">
-                        <button
-                            onClick={() => setIsBookingOpen(true)}
-                            className="bg-gradient-to-r from-[#ECC880] to-[#C5A059] text-[#270611] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] shadow-lg hover:shadow-2xl transition-all"
-                        >
-                            Schedule Private Viewing
-                        </button>
-
                         <a
-                            href={`https://wa.me/${BUSINESS_DETAILS.whatsappClean}`}
+                            href={`https://wa.me/${BUSINESS_DETAILS.whatsappClean}?text=${encodeURIComponent('नमस्ते यश ज्वेलर्स! मुझे शोरूम विजिट एवं आभूषणों के बारे में जानकारी चाहिए।')}`}
                             target="_blank"
                             rel="noopener noreferrer"
+                            className="bg-gradient-to-r from-[#ECC880] to-[#C5A059] text-[#270611] px-8 py-3.5 text-xs font-bold uppercase tracking-[0.2em] shadow-lg hover:shadow-2xl transition-all"
+                        >
+                            WhatsApp Chat ({BUSINESS_DETAILS.phoneFormatted})
+                        </a>
+
+                        <a
+                            href={`tel:${BUSINESS_DETAILS.phoneClean}`}
                             className="inline-flex items-center gap-2 border border-[#C5A059] text-[#FAF7F2] px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-[#3C081A] transition-colors"
                         >
-                            <MessageCircle size={15} className="text-[#C5A059]" />
-                            <span>WhatsApp VIP Chat ({BUSINESS_DETAILS.phoneFormatted})</span>
+                            <span>Call Showroom</span>
                         </a>
                     </div>
                 </div>
@@ -591,6 +714,12 @@ export default function Home() {
             <AtelierBookingModal
                 isOpen={isBookingOpen}
                 onClose={() => setIsBookingOpen(false)}
+            />
+
+            {/* Custom Design Submission Modal */}
+            <CustomDesignModal
+                isOpen={isCustomDesignOpen}
+                onClose={() => setIsCustomDesignOpen(false)}
             />
 
         </div>

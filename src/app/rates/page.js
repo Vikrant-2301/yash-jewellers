@@ -55,16 +55,16 @@ export default function Rates() {
                 <div className="text-center mb-10 max-w-2xl mx-auto">
                     <div className="inline-flex items-center gap-2 text-[#C5A059] text-[10px] uppercase font-bold tracking-[0.3em] mb-2">
                         <Sparkles size={13} className="text-[#DFBE7A]" />
-                        <span>Daily Gold &amp; Silver Benchmark · आज का भाव</span>
+                        <span>Sarafa Mandi Live Stream · आज का कैश भाव व सूत्र</span>
                     </div>
                     <h1 className="font-serif text-3xl md:text-5xl text-[#FAF7F2] font-normal">
-                        Live Gold Rates · Yash Jewellers
+                        Live Cash Bhav &amp; Rates · Yash Jewellers
                     </h1>
                     <div className="ornament-divider">
                         <span className="w-2 h-2 rotate-45 bg-[#C5A059]"></span>
                     </div>
                     <p className="text-xs md:text-sm text-[#EAD8B1]/80 leading-relaxed">
-                        100% genuine live gold rates streaming in real-time. Transparent pricing based on 22K BIS Hallmarked jewellery benchmarks with zero hidden costs.
+                        100% genuine live market Cash Bhav streaming in real-time. Transparent retail jewellery rates (24K Pure, 22K 916 Hallmark, Silver Refinery 99+ per 1 KG) with exact pricing formulas.
                     </p>
                 </div>
 

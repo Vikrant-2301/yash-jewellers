@@ -66,35 +66,41 @@ export default function Header() {
                     </button>
 
                     {/* Royal Logo & Monogram */}
-                    <Link href="/" className="flex flex-col items-center group text-center mx-auto md:mx-0">
-                        <div className="flex items-center gap-2">
-                            <span className="h-px w-6 bg-[#C5A059] hidden sm:inline-block" />
-                            <span className="text-[9px] uppercase tracking-[0.35em] text-[#6B0E2A] font-semibold">
-                                Chaubepur, Kanpur
+                    <Link href="/" className="flex items-center gap-3 group mx-auto md:mx-0">
+                        <img 
+                            src="/images/yash/business/logo/logo-1923200437.jpeg" 
+                            alt="Yash Jewellers Logo" 
+                            className="w-10 h-10 md:w-11 md:h-11 rounded-full object-cover border-2 border-[#C5A059] shadow-sm group-hover:scale-105 transition-transform"
+                        />
+                        <div className="flex flex-col text-left">
+                            <div className="flex items-center gap-1.5">
+                                <span className="text-[9px] uppercase tracking-[0.25em] text-[#6B0E2A] font-bold">
+                                    Chaubepur, Kanpur
+                                </span>
+                            </div>
+                            <h1 className="font-serif text-xl md:text-2xl lg:text-[26px] tracking-[0.05em] font-normal text-[#270611] leading-none mt-0.5">
+                                YASH <span className="font-serif italic font-bold text-gold-gradient">JEWELLERS</span>
+                            </h1>
+                            <span className="text-[8px] tracking-[0.18em] text-[#8C6D38] uppercase font-medium mt-0.5 hidden sm:inline">
+                                100% बीआईएस हॉलमार्क जेवर
                             </span>
-                            <span className="h-px w-6 bg-[#C5A059] hidden sm:inline-block" />
                         </div>
-                        <h1 className="font-serif text-2xl md:text-3xl lg:text-[32px] tracking-[0.08em] font-normal text-[#270611] leading-none mt-1">
-                            YASH <span className="font-serif italic font-bold text-gold-gradient">JEWELLERS</span>
-                        </h1>
-                        <span className="text-[9px] tracking-[0.25em] text-[#8C6D38] uppercase font-medium mt-1">
-                            100% बीआईएस हॉलमार्क सोने-चांदी के आभूषण
-                        </span>
                     </Link>
 
                     {/* Desktop Links */}
-                    <nav className="hidden md:flex gap-7 items-center">
+                    <nav className="hidden md:flex gap-5 lg:gap-6 items-center">
                         {[
                             { name: 'Home', path: '/', hi: 'गृह' },
                             { name: 'Collections', path: '/shop', hi: 'संग्रह' },
-                            { name: 'Live Gold Rates', path: '/rates', hi: 'सोना भाव' },
+                            { name: 'Custom Design', path: '/shop#custom-design', hi: 'डिज़ाइन भेजें' },
+                            { name: 'Live Rates', path: '/rates', hi: 'सोना भाव' },
                             { name: 'Heritage', path: '/about', hi: 'विरासत' },
                             { name: 'Boutique', path: '/contact', hi: 'संपर्क' }
                         ].map((item) => (
                             <Link
                                 key={item.name}
                                 href={item.path}
-                                className="text-[#270611] hover:text-[#6B0E2A] transition-colors uppercase tracking-[0.18em] text-[11px] font-bold relative group py-1"
+                                className="text-[#270611] hover:text-[#6B0E2A] transition-colors uppercase tracking-[0.16em] text-[11px] font-bold relative group py-1"
                             >
                                 <span>{item.name}</span>
                                 <span className="absolute -bottom-1 left-0 w-0 h-[2px] bg-gradient-to-r from-[#C5A059] to-[#6B0E2A] transition-all duration-300 group-hover:w-full"></span>
@@ -103,15 +109,22 @@ export default function Header() {
                     </nav>
 
                     {/* Desktop CTA Buttons */}
-                    <div className="hidden lg:flex items-center gap-4">
+                    <div className="hidden lg:flex items-center gap-3">
+                        <Link
+                            href="/shop#custom-design"
+                            className="inline-flex items-center gap-1.5 bg-[#FAF7F2] hover:bg-[#F3E8D0] text-[#6B0E2A] px-3.5 py-2 text-[10px] font-bold uppercase tracking-[0.18em] border border-[#C5A059] transition-all duration-300"
+                        >
+                            <Sparkles size={12} className="text-[#C5A059]" />
+                            <span>Send Photo</span>
+                        </Link>
                         <a
                             href={`https://wa.me/${BUSINESS_DETAILS.whatsappClean}?text=${encodeURIComponent("Namaste Yash Jewellers, I would like to book a jewellery consultation.")}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-2 bg-[#6B0E2A] hover:bg-[#4E0A1E] text-[#FAF7F2] px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.22em] border border-[#C5A059]/40 transition-all duration-300 shadow-sm hover:shadow-md"
+                            className="inline-flex items-center gap-2 bg-[#6B0E2A] hover:bg-[#4E0A1E] text-[#FAF7F2] px-4 py-2 text-[10px] font-bold uppercase tracking-[0.18em] border border-[#C5A059]/40 transition-all duration-300 shadow-sm hover:shadow-md"
                         >
-                            <Calendar size={13} className="text-[#C5A059]" />
-                            <span>Book Consultation</span>
+                            <Calendar size={12} className="text-[#C5A059]" />
+                            <span>Consultation</span>
                         </a>
                     </div>
 
@@ -166,6 +179,7 @@ export default function Header() {
                                 {[
                                     { name: 'Home', path: '/', hi: 'मुख्य पृष्ठ' },
                                     { name: 'High Jewellery Catalogue', path: '/shop', hi: 'शाही आभूषण संग्रह' },
+                                    { name: 'Custom Design Karigari', path: '/shop#custom-design', hi: 'मनपसंद डिज़ाइन अपने वजन में बनवाएं' },
                                     { name: 'Live Gold Rates', path: '/rates', hi: 'लाइव सोने-चांदी के भाव' },
                                     { name: 'Heritage & Craftsmanship', path: '/about', hi: 'हमारी विरासत एवं कला' },
                                     { name: 'Bespoke Atelier & Store', path: '/contact', hi: 'स्टोर एवं निजी परामर्श' }

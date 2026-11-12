@@ -5,16 +5,19 @@ import React, { createContext, useContext, useState, useEffect, useCallback } fr
 const RatesContext = createContext(null);
 
 const DEFAULT_RATES = {
-    gold24k: 138250,
-    gold22k: 125000,
-    gold18k: 103000,
-    gold14k: 81450,
-    silver: 182500,
-    perGram24k: 13825,
-    perGram22k: 12500,
-    perGram18k: 10300,
-    perGram14k: 8145,
-    perGramSilver: 182.50
+    gold995Cash: 140955,
+    gold24k: 141663,
+    gold22k: 125065,
+    gold18k: 103049,
+    gold14k: 81497,
+    silver: 186284,
+    silverKg: 186284,
+    silver10g: 1863,
+    perGram24k: 14166,
+    perGram22k: 12507,
+    perGram18k: 10305,
+    perGram14k: 8150,
+    perGramSilver: 186.28
 };
 
 export function RatesProvider({ children }) {
@@ -39,8 +42,8 @@ export function RatesProvider({ children }) {
 
     useEffect(() => {
         fetchRates();
-        // Refresh every 12 seconds to keep in sync with live market
-        const interval = setInterval(fetchRates, 12000);
+        // Refresh every 10 seconds to keep in sync with live market
+        const interval = setInterval(fetchRates, 10000);
         return () => clearInterval(interval);
     }, [fetchRates]);
 
@@ -51,7 +54,8 @@ export function RatesProvider({ children }) {
     };
 
     /**
-     * Dynamically calculates authentic retail jewellery landed price based on live rates
+     * Dynamically calculates authentic retail jewellery landed price based on Sarafa Mandi live rates
+     * Formula: [(Net Weight in g * Per-Gram Purity Rate) + Making Charges] * 1.03 (GST)
      */
     const calculateJewelleryPrice = useCallback((weightStr, purityStr, makingStr, fallbackPrice) => {
         const activeRates = data?.rates || DEFAULT_RATES;
@@ -76,25 +80,25 @@ export function RatesProvider({ children }) {
 
         // 2. Determine Purity Standard and Per-Gram Rate
         const purityNormalized = (purityStr || "22k").toLowerCase();
-        let ratePerGram = activeRates.perGram22k || 12500;
+        let ratePerGram = activeRates.perGram22k || 12507;
         let purityStandard = "22K (916 BIS Hallmark)";
 
-        if (purityNormalized.includes("24k") || purityNormalized.includes("999")) {
-            ratePerGram = activeRates.perGram24k || 13825;
-            purityStandard = "24K (999 Pure Gold)";
+        if (purityNormalized.includes("silver") || purityNormalized.includes("925") || purityNormalized.includes("chandi") || purityNormalized.includes("payal")) {
+            ratePerGram = activeRates.perGramSilver || 186.28;
+            purityStandard = "Silver 999 Fine (Refinery Cash Bhav)";
+        } else if (purityNormalized.includes("24k") || purityNormalized.includes("999")) {
+            ratePerGram = activeRates.perGram24k || 14166;
+            purityStandard = "24K (999 Pure Cash Bhav)";
         } else if (purityNormalized.includes("18k") || purityNormalized.includes("750")) {
-            ratePerGram = activeRates.perGram18k || 10300;
-            purityStandard = "18K (750 Diamond Gold)";
+            ratePerGram = activeRates.perGram18k || 10305;
+            purityStandard = "18K (750 Diamond Mount)";
         } else if (purityNormalized.includes("14k") || purityNormalized.includes("585")) {
-            ratePerGram = activeRates.perGram14k || 8145;
-            purityStandard = "14K (585 Modern Gold)";
-        } else if (purityNormalized.includes("silver") || purityNormalized.includes("925") || purityNormalized.includes("chandi")) {
-            ratePerGram = activeRates.perGramSilver || 182.50;
-            purityStandard = "Silver 999 Fine";
+            ratePerGram = activeRates.perGram14k || 8150;
+            purityStandard = "14K (585 Modern Wear)";
         }
 
         // 3. Extract Making Charge %
-        let makingPct = 9; // Default 9% making charges for fine handcrafted gold
+        let makingPct = 9; // Default 9% making charges for handcrafted gold jewellery
         if (typeof makingStr === 'number') {
             makingPct = makingStr;
         } else if (typeof makingStr === 'string') {
@@ -131,8 +135,10 @@ export function RatesProvider({ children }) {
         <RatesContext.Provider value={{
             data,
             rates: data?.rates || DEFAULT_RATES,
+            cashBhav: data?.cashBhav || null,
             spot: data?.spot || null,
             commodities: data?.commodities || null,
+            formula: data?.formula || null,
             notice: data?.notice || "",
             loading,
             lastUpdated,
@@ -148,9 +154,9 @@ export function RatesProvider({ children }) {
 export function useRates() {
     const context = useContext(RatesContext);
     if (!context) {
-        // Fallback dummy context if used outside provider
         return {
             rates: DEFAULT_RATES,
+            cashBhav: null,
             loading: false,
             formatINR: (val) => new Intl.NumberFormat('en-IN', { maximumFractionDigits: 0 }).format(val || 0),
             calculateJewelleryPrice: (w, p, m, fallback) => ({
@@ -162,4 +168,3 @@ export function useRates() {
     }
     return context;
 }
-

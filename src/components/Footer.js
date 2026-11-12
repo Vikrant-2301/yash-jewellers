@@ -134,6 +134,11 @@ export default function Footer() {
                                 </Link>
                             </li>
                             <li>
+                                <Link href="/shop#custom-design" className="hover:text-[#DFBE7A] transition-colors text-[#DFBE7A] font-semibold">
+                                    Send Any Design Photo (Custom Weight)
+                                </Link>
+                            </li>
+                            <li>
                                 <Link href="/rates" className="hover:text-[#DFBE7A] transition-colors">
                                     Jewellery Price &amp; Value Estimator
                                 </Link>
