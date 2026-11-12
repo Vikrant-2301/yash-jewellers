@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, MessageSquare, Sparkles, CheckCircle, ShieldCheck } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, MessageSquare, Sparkles, CheckCircle, ShieldCheck, ExternalLink } from 'lucide-react';
+import { BUSINESS_DETAILS } from '@/src/config/business';
 
 export default function Contact() {
     const [submitted, setSubmitted] = useState(false);
@@ -19,7 +20,7 @@ export default function Contact() {
 
         const waText = `Namaste Yash Jewellers,%0A- Client: ${formData.name}%0A- Phone: ${formData.phone}%0A- Email: ${formData.email}%0A- Interest: ${formData.interest}%0A- Message: ${formData.message}`;
         setTimeout(() => {
-            window.open(`https://wa.me/918881121119?text=${waText}`, '_blank');
+            window.open(`https://wa.me/${BUSINESS_DETAILS.whatsappClean}?text=${waText}`, '_blank');
         }, 1200);
     };
 
@@ -33,13 +34,13 @@ export default function Contact() {
                         Boutique &amp; Concierge · संपर्क एवं निजी परामर्श
                     </span>
                     <h1 className="font-serif text-3xl md:text-5xl text-[#270611] mt-2 font-normal">
-                        Experience Our Atelier
+                        Visit Our Showroom
                     </h1>
                     <div className="ornament-divider">
                         <span className="w-2 h-2 rotate-45 bg-[#C5A059]"></span>
                     </div>
                     <p className="text-xs md:text-sm text-gray-600 leading-relaxed">
-                        Whether visiting our boutique showroom in Kanpur or arranging a private bridal preview, our senior jewellery consultants are at your service.
+                        Whether visiting our Chaubepur showroom in Kanpur or arranging a private bridal preview, our senior jewellery consultants look forward to welcoming you.
                     </p>
                 </div>
 
@@ -53,19 +54,19 @@ export default function Contact() {
                             
                             <div className="relative z-10">
                                 <span className="text-[10px] uppercase font-bold tracking-[0.25em] text-[#C5A059]">
-                                    Flagship Showroom · मुख्य प्रतिष्ठान
+                                    Showroom Location · मुख्य प्रतिष्ठान
                                 </span>
                                 <h2 className="font-serif text-2xl text-[#FAF7F2] font-semibold mt-1 mb-6">
-                                    Yash Jewellers
+                                    {BUSINESS_DETAILS.name} ({BUSINESS_DETAILS.hindiName})
                                 </h2>
 
                                 <div className="space-y-5 text-xs text-[#FAF7F2]/90">
                                     <div className="flex items-start gap-3">
                                         <MapPin size={18} className="text-[#C5A059] shrink-0 mt-0.5" />
                                         <div>
-                                            <p className="font-bold text-[#FAF7F2]">Kanpur Boutique &amp; Bullion Desk</p>
+                                            <p className="font-bold text-[#FAF7F2]">Store Address</p>
                                             <p className="text-[#EAD8B1]/75 leading-relaxed mt-0.5">
-                                                307, Krishna Niwas, Yusuf Meherali Road &amp; Kanpur Bullion Center, Uttar Pradesh, India
+                                                {BUSINESS_DETAILS.address}
                                             </p>
                                         </div>
                                     </div>
@@ -73,8 +74,12 @@ export default function Contact() {
                                     <div className="flex items-start gap-3">
                                         <Phone size={18} className="text-[#C5A059] shrink-0 mt-0.5" />
                                         <div>
-                                            <p className="font-bold text-[#FAF7F2]">Concierge Line &amp; WhatsApp</p>
-                                            <p className="text-[#EAD8B1]/75 mt-0.5">+91 88811 21119</p>
+                                            <p className="font-bold text-[#FAF7F2]">Direct Phone &amp; WhatsApp</p>
+                                            <p className="text-[#EAD8B1]/75 mt-0.5">
+                                                <a href={`tel:${BUSINESS_DETAILS.phoneClean}`} className="hover:underline">
+                                                    {BUSINESS_DETAILS.phoneFormatted}
+                                                </a>
+                                            </p>
                                         </div>
                                     </div>
 
@@ -82,8 +87,8 @@ export default function Contact() {
                                         <Clock size={18} className="text-[#C5A059] shrink-0 mt-0.5" />
                                         <div>
                                             <p className="font-bold text-[#FAF7F2]">Showroom Hours</p>
-                                            <p className="text-[#EAD8B1]/75 mt-0.5">Monday – Saturday: 10:30 AM – 8:30 PM</p>
-                                            <p className="text-[#C5A059] text-[10px] mt-0.5 italic">Sunday: Reserved for VIP Bridal Appointments</p>
+                                            <p className="text-[#EAD8B1]/75 mt-0.5">{BUSINESS_DETAILS.hoursWeekday}</p>
+                                            <p className="text-[#C5A059] text-[10px] mt-0.5 italic">{BUSINESS_DETAILS.hoursSunday}</p>
                                         </div>
                                     </div>
 
@@ -91,20 +96,31 @@ export default function Contact() {
                                         <Mail size={18} className="text-[#C5A059] shrink-0 mt-0.5" />
                                         <div>
                                             <p className="font-bold text-[#FAF7F2]">Email Inquiries</p>
-                                            <p className="text-[#EAD8B1]/75 mt-0.5">concierge@yashjewellers.com</p>
+                                            <p className="text-[#EAD8B1]/75 mt-0.5">{BUSINESS_DETAILS.email}</p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="mt-8 pt-6 border-t border-[#C5A059]/30">
+                                <div className="mt-8 pt-6 border-t border-[#C5A059]/30 flex flex-wrap gap-3">
                                     <a
-                                        href="https://maps.google.com/?q=Yash+Jewellers+Kanpur"
+                                        href={BUSINESS_DETAILS.mapsLink}
                                         target="_blank"
                                         rel="noopener noreferrer"
                                         className="inline-flex items-center gap-2 bg-[#6B0E2A] hover:bg-[#851336] text-white px-5 py-2.5 text-[11px] uppercase tracking-widest font-bold border border-[#C5A059]/40 transition-colors"
                                     >
                                         <MapPin size={13} className="text-[#C5A059]" />
-                                        <span>Get Driving Directions</span>
+                                        <span>Open in Google Maps</span>
+                                        <ExternalLink size={12} />
+                                    </a>
+
+                                    <a
+                                        href={`https://wa.me/${BUSINESS_DETAILS.whatsappClean}`}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="inline-flex items-center gap-2 bg-[#1F040D] hover:bg-[#38081A] text-white px-5 py-2.5 text-[11px] uppercase tracking-widest font-bold border border-[#C5A059]/40 transition-colors"
+                                    >
+                                        <MessageSquare size={13} className="text-[#C5A059]" />
+                                        <span>Chat on WhatsApp</span>
                                     </a>
                                 </div>
                             </div>
@@ -114,8 +130,8 @@ export default function Contact() {
                         <div className="bg-white p-5 border border-[#C5A059]/30 flex items-center gap-4 shadow-sm">
                             <ShieldCheck size={32} className="text-[#6B0E2A] shrink-0" />
                             <div>
-                                <h4 className="font-serif text-sm font-bold text-[#270611]">Valet Parking &amp; Private Lounge</h4>
-                                <p className="text-xs text-gray-600 mt-0.5">Dedicated private viewing room with security escort for bridal and high-value selections.</p>
+                                <h4 className="font-serif text-sm font-bold text-[#270611]">Private Lounge &amp; Parking</h4>
+                                <p className="text-xs text-gray-600 mt-0.5">Dedicated private viewing lounge with expert assistance for bridal and heirloom jewellery selections.</p>
                             </div>
                         </div>
 
@@ -134,7 +150,7 @@ export default function Contact() {
                                         Personal Jewellery Consultation
                                     </h2>
                                     <p className="text-xs text-gray-600 mt-1">
-                                        Please share your details below and our senior consultant will respond promptly.
+                                        Please share your details below and our team will connect with you on WhatsApp / Phone promptly.
                                     </p>
                                 </div>
 
@@ -164,7 +180,7 @@ export default function Contact() {
                                                 value={formData.phone}
                                                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                                                 className="w-full bg-[#FAF7F2] border border-[#C5A059]/40 px-3.5 py-2.5 text-xs text-[#270611] focus:outline-none focus:border-[#6B0E2A]"
-                                                placeholder="+91 98888 XXXXX"
+                                                placeholder="+91 93077 77500"
                                             />
                                         </div>
                                     </div>
@@ -192,11 +208,11 @@ export default function Contact() {
                                                 onChange={(e) => setFormData({ ...formData, interest: e.target.value })}
                                                 className="w-full bg-[#FAF7F2] border border-[#C5A059]/40 px-3.5 py-2.5 text-xs text-[#270611] focus:outline-none focus:border-[#6B0E2A]"
                                             >
-                                                <option value="Bridal Jewellery Consultation">Bridal Jewellery Consultation</option>
-                                                <option value="Polki & Kundan Custom Set">Polki &amp; Kundan Custom Set</option>
-                                                <option value="Temple Gold Ornaments">Temple Gold Ornaments</option>
-                                                <option value="Solitaire Engagement Ring">Solitaire Engagement Ring</option>
-                                                <option value="Bullion Investment / Bulk Gold">Bullion Investment / Bulk Gold</option>
+                                                <option value="Bridal Jewellery Consultation">Bridal Jewellery Suite</option>
+                                                <option value="Polki & Kundan Custom Set">Polki &amp; Kundan Jadau</option>
+                                                <option value="Temple Gold Ornaments">22K Temple Gold Ornaments</option>
+                                                <option value="Solitaire Engagement Ring">Solitaire &amp; Diamond Rings</option>
+                                                <option value="Gold Chains, Kangans & Everyday Wear">Gold Chains, Kangans &amp; Everyday Wear</option>
                                             </select>
                                         </div>
                                     </div>
@@ -233,7 +249,7 @@ export default function Contact() {
                                     "यश ज्वेलर्स परिवार में आपका स्वागत है"
                                 </p>
                                 <p className="text-xs text-gray-600 max-w-sm mx-auto leading-relaxed">
-                                    Thank you, {formData.name}. Our master jewellery concierge has received your request and will connect with you on WhatsApp within 30 minutes.
+                                    Thank you, {formData.name}. Our master jewellery concierge has received your request and will connect with you on WhatsApp ({BUSINESS_DETAILS.phoneFormatted}) within 30 minutes.
                                 </p>
                                 <button
                                     onClick={() => setSubmitted(false)}

@@ -6,6 +6,7 @@ import ProductCard from "../components/ProductCard";
 import RateCard from "../components/RateCard";
 import AtelierBookingModal from "../components/AtelierBookingModal";
 import Link from 'next/link';
+import { BUSINESS_DETAILS } from "@/src/config/business";
 import { 
     ArrowRight, 
     ShieldCheck, 
@@ -167,8 +168,8 @@ export default function Home() {
                             <div className="w-12 h-12 rounded-full bg-[#3C081A] flex items-center justify-center border border-[#C5A059]/40 group-hover:border-[#C5A059] transition-colors">
                                 <Award className="w-6 h-6 text-[#DFBE7A]" />
                             </div>
-                            <h3 className="font-serif text-sm md:text-base font-semibold text-[#FAF7F2]">Bullion Benchmark</h3>
-                            <p className="text-[10px] text-[#EAD8B1]/70 tracking-wider">Kanpur &amp; Delhi Direct Spot</p>
+                            <h3 className="font-serif text-sm md:text-base font-semibold text-[#FAF7F2]">100% Purity Guarantee</h3>
+                            <p className="text-[10px] text-[#EAD8B1]/70 tracking-wider">HUID Laser Certified 916 Gold</p>
                         </div>
 
                         <div className="flex flex-col items-center gap-2 group">
@@ -182,7 +183,7 @@ export default function Home() {
                 </div>
             </section>
 
-            {/* 3. Live Bullion Trading Desk Preview */}
+            {/* 3. Live Gold Rates Desk Preview */}
             <section className="py-16 md:py-24 bg-[#270611] text-[#FAF7F2] relative border-b border-[#C5A059]/30">
                 <div className="absolute inset-0 opacity-10 bg-heritage-pattern pointer-events-none" />
                 
@@ -190,16 +191,16 @@ export default function Home() {
                     <div className="text-center max-w-2xl mx-auto mb-10">
                         <div className="inline-flex items-center gap-2 text-[#C5A059] text-[10px] uppercase font-bold tracking-[0.3em] mb-2">
                             <Sparkles size={13} className="text-[#DFBE7A]" />
-                            <span>Real-Time Market Benchmark · सर्राफा भाव</span>
+                            <span>Real-Time Market Benchmark · आज का सोना भाव</span>
                         </div>
                         <h2 className="font-serif text-3xl md:text-5xl text-[#FAF7F2] font-normal">
-                            Live Bullion Rates
+                            Live Gold Rates
                         </h2>
                         <div className="ornament-divider">
                             <span className="w-2 h-2 rotate-45 bg-[#C5A059]"></span>
                         </div>
                         <p className="text-xs md:text-sm text-[#EAD8B1]/80 leading-relaxed">
-                            Landed wholesale bullion prices derived directly from International Spot conforming to Government Customs Duty (6%) and GST (3%). Zero speculative markup.
+                            Transparent landed gold and silver rates streaming live in real-time. Conforming directly to 22K BIS Hallmarked jewellery standards.
                         </p>
                     </div>
 
@@ -381,7 +382,7 @@ export default function Home() {
                                 <div className="flex items-start gap-2.5">
                                     <Check size={16} className="text-[#C5A059] shrink-0 mt-0.5" />
                                     <div>
-                                        <p className="font-bold text-[#FAF7F2]">Direct Bullion Parity</p>
+                                        <p className="font-bold text-[#FAF7F2]">Direct Gold Parity</p>
                                         <p className="text-[#EAD8B1]/60 text-[11px]">Benchmark landed rate integration</p>
                                     </div>
                                 </div>
@@ -447,7 +448,7 @@ export default function Home() {
                             <div className="text-[10px] font-bold uppercase tracking-widest text-[#6B0E2A] mb-2">
                                 99.9% Purity · 24 Karat
                             </div>
-                            <h3 className="font-serif text-2xl text-[#270611] font-semibold mb-2">24K Bullion Gold</h3>
+                            <h3 className="font-serif text-2xl text-[#270611] font-semibold mb-2">24K Pure Gold</h3>
                             <p className="text-xs text-gray-600 leading-relaxed mb-4">
                                 The purest form of gold with zero alloys. Ideal for minted gold coins, investment bars, and sacred pooja deities.
                             </p>
@@ -509,7 +510,7 @@ export default function Home() {
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
                         {[
                             {
-                                quote: "Yash Jewellers crafted my complete wedding bridal set. The karigari on the Kundan choker was unmatched, and their bullion rate calculation was 100% transparent.",
+                                quote: "Yash Jewellers crafted my complete wedding bridal set. The karigari on the Kundan choker was unmatched, and their live gold rate calculation was 100% transparent.",
                                 name: "Aaradhya Gupta",
                                 location: "Civil Lines, Kanpur",
                                 occasion: "Bridal Suite Customer"
@@ -574,13 +575,13 @@ export default function Home() {
                         </button>
 
                         <a
-                            href="https://wa.me/918881121119"
+                            href={`https://wa.me/${BUSINESS_DETAILS.whatsappClean}`}
                             target="_blank"
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 border border-[#C5A059] text-[#FAF7F2] px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] hover:bg-[#3C081A] transition-colors"
                         >
                             <MessageCircle size={15} className="text-[#C5A059]" />
-                            <span>WhatsApp VIP Chat</span>
+                            <span>WhatsApp VIP Chat ({BUSINESS_DETAILS.phoneFormatted})</span>
                         </a>
                     </div>
                 </div>

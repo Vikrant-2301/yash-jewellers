@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import RateCard from "@/src/components/RateCard";
 import { Clock, ShieldCheck, Landmark, Phone, MessageSquare, Sparkles, Award } from 'lucide-react';
+import { BUSINESS_DETAILS } from '@/src/config/business';
 
 export default function Rates() {
     const [istTime, setIstTime] = useState('--:--:--');
@@ -27,7 +28,7 @@ export default function Rates() {
 
             <div className="container mx-auto px-4 md:px-8 relative z-10">
                 
-                {/* 1. International Bullion Clocks Bar */}
+                {/* 1. International Clocks Bar */}
                 <div className="bg-[#1F040D] border border-[#C5A059]/30 p-3 max-w-5xl mx-auto mb-10 flex flex-wrap justify-between items-center text-xs text-[#FAF7F2] gap-3">
                     <div className="flex flex-wrap items-center gap-6">
                         <div className="flex items-center gap-2">
@@ -40,13 +41,13 @@ export default function Rates() {
                             <span className="font-mono text-[#FAF7F2] font-bold">{nyTime}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <span className="text-[#EAD8B1]/70">London LME:</span>
+                            <span className="text-[#EAD8B1]/70">London LBMA:</span>
                             <span className="font-mono text-[#FAF7F2] font-bold">{londonTime}</span>
                         </div>
                     </div>
                     <div className="flex items-center gap-2 text-emerald-400 font-bold text-[11px] tracking-wider">
                         <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-                        <span>LIVE BENCHMARK ACTIVE</span>
+                        <span>LIVE STREAM ACTIVE</span>
                     </div>
                 </div>
 
@@ -54,16 +55,16 @@ export default function Rates() {
                 <div className="text-center mb-10 max-w-2xl mx-auto">
                     <div className="inline-flex items-center gap-2 text-[#C5A059] text-[10px] uppercase font-bold tracking-[0.3em] mb-2">
                         <Sparkles size={13} className="text-[#DFBE7A]" />
-                        <span>Kanpur &amp; Delhi Bullion Exchange · सर्राफा भाव</span>
+                        <span>Daily Gold &amp; Silver Benchmark · आज का भाव</span>
                     </div>
                     <h1 className="font-serif text-3xl md:text-5xl text-[#FAF7F2] font-normal">
-                        Live Gold &amp; Silver Rates
+                        Live Gold Rates · Yash Jewellers
                     </h1>
                     <div className="ornament-divider">
                         <span className="w-2 h-2 rotate-45 bg-[#C5A059]"></span>
                     </div>
                     <p className="text-xs md:text-sm text-[#EAD8B1]/80 leading-relaxed">
-                        100% genuine landed wholesale rates derived directly from International Spot benchmarks conforming to Indian Customs Duty (6%) and GST (3%).
+                        100% genuine live gold rates streaming in real-time. Transparent pricing based on 22K BIS Hallmarked jewellery benchmarks with zero hidden costs.
                     </p>
                 </div>
 
@@ -75,50 +76,50 @@ export default function Rates() {
                     <div className="bg-[#1F040D] p-6 border-t-2 border-[#C5A059] border-x border-b border-[#C5A059]/20 shadow-lg">
                         <div className="flex items-center gap-2 text-[#C5A059] font-bold text-sm mb-2">
                             <ShieldCheck size={18} className="text-[#DFBE7A]" /> 
-                            <span>100% Genuine Formula</span>
+                            <span>100% BIS Hallmarked</span>
                         </div>
                         <p className="text-xs text-[#EAD8B1]/70 leading-relaxed font-sans">
-                            Our rates are mathematically indexed to London bullion spot, dollar exchange rate, and Indian duty with absolute transparency.
+                            Every ornament is certified with a 6-digit laser-engraved HUID number guaranteeing genuine 916 gold purity.
                         </p>
                     </div>
 
                     <div className="bg-[#1F040D] p-6 border-t-2 border-[#C5A059] border-x border-b border-[#C5A059]/20 shadow-lg">
                         <div className="flex items-center gap-2 text-[#C5A059] font-bold text-sm mb-2">
                             <Landmark size={18} className="text-[#DFBE7A]" /> 
-                            <span>Kanpur Bullion Parity</span>
+                            <span>Transparent Daily Bhav</span>
                         </div>
                         <p className="text-xs text-[#EAD8B1]/70 leading-relaxed font-sans">
-                            Direct execution rates accepted across major bullion dealers and retail patrons in Uttar Pradesh since 1975.
+                            Direct market parity rates with itemized billing for gold weight, making charges, and statutory 3% GST.
                         </p>
                     </div>
 
                     <div className="bg-[#1F040D] p-6 border-t-2 border-[#C5A059] border-x border-b border-[#C5A059]/20 shadow-lg">
                         <div className="flex items-center gap-2 text-[#C5A059] font-bold text-sm mb-2">
                             <Award size={18} className="text-[#DFBE7A]" /> 
-                            <span>Assay Certified Delivery</span>
+                            <span>Chaubepur Showroom Trust</span>
                         </div>
                         <p className="text-xs text-[#EAD8B1]/70 leading-relaxed font-sans">
-                            Physical 999 coins and 916 gold ornaments accompanied by government hallmarking certificates and immediate assaying.
+                            Serving Kanpur, Bithoor, and Uttar Pradesh families with generations of artisanal excellence and complete buyback trust.
                         </p>
                     </div>
                 </div>
 
-                {/* 5. Bullion Desk Direct WhatsApp CTA */}
+                {/* 5. Custom Wedding Jewellery Direct WhatsApp CTA */}
                 <div className="mt-14 max-w-3xl mx-auto text-center p-8 bg-[#38081A] border border-[#C5A059]/40">
                     <h3 className="font-serif text-2xl text-[#FAF7F2]">
-                        Looking for Bulk Bullion or Wedding Jewellery?
+                        Planning Bridal or Custom Wedding Jewellery?
                     </h3>
                     <p className="text-xs text-[#EAD8B1] mt-2 mb-6">
-                        Lock live wholesale gold prices for upcoming wedding orders directly with our senior bullion desk.
+                        Lock live gold prices for your upcoming wedding orders and discuss custom bridal designs directly with our master karigars.
                     </p>
                     <a
-                        href="https://api.whatsapp.com/send?phone=919336120419&text=Namaste%20Yash%20Jewellers,%20I%20am%20interested%20in%20locking%20gold%20rates%20for%20a%20wedding%20jewellery%20purchase."
+                        href={`https://wa.me/${BUSINESS_DETAILS.whatsappClean}?text=${encodeURIComponent("Namaste Yash Jewellers, I would like to inquire about current live gold rates and discuss a custom bridal jewellery purchase.")}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-2 bg-[#6B0E2A] hover:bg-[#851336] text-white px-8 py-3 text-xs uppercase font-bold tracking-widest border border-[#C5A059]/50 transition-colors"
                     >
                         <MessageSquare size={14} className="text-[#C5A059]" />
-                        <span>Connect to Bullion Trading Desk</span>
+                        <span>Chat with Jewellery Concierge ({BUSINESS_DETAILS.phoneFormatted})</span>
                     </a>
                 </div>
 

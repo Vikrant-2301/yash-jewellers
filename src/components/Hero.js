@@ -130,7 +130,7 @@ export default function Hero() {
                             className="inline-flex items-center gap-2.5 bg-[#3C081A]/80 hover:bg-[#6B0E2A] text-[#FAF7F2] border border-[#C5A059]/50 px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.2em] transition-all duration-300 backdrop-blur-sm"
                         >
                             <TrendingUp size={14} className="text-[#C5A059]" />
-                            <span>Live Bullion Desk</span>
+                            <span>Live Gold Rates</span>
                         </Link>
                     </div>
 

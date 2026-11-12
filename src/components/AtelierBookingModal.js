@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { X, Calendar, Clock, Sparkles, CheckCircle, MapPin, MessageCircle } from "lucide-react";
+import { BUSINESS_DETAILS } from "@/src/config/business";
 
 export default function AtelierBookingModal({ isOpen, onClose }) {
     const [submitted, setSubmitted] = useState(false);
@@ -11,7 +12,7 @@ export default function AtelierBookingModal({ isOpen, onClose }) {
         category: "Bridal Jewellery",
         date: "",
         timeSlot: "Morning (11:00 AM - 1:00 PM)",
-        consultationType: "In-Store Private Lounge (Kanpur)"
+        consultationType: "In-Store Private Lounge (Chaubepur, Kanpur)"
     });
 
     if (!isOpen) return null;
@@ -20,10 +21,10 @@ export default function AtelierBookingModal({ isOpen, onClose }) {
         e.preventDefault();
         setSubmitted(true);
         
-        // Also prepare WhatsApp notification
-        const msg = `Namaste Yash Jewellers, I have requested a VIP Atelier Consultation:%0A- Name: ${formData.name}%0A- Phone: ${formData.phone}%0A- Interest: ${formData.category}%0A- Date: ${formData.date}%0A- Slot: ${formData.timeSlot}%0A- Mode: ${formData.consultationType}`;
+        // Prepare WhatsApp notification
+        const msg = `Namaste Yash Jewellers, I have requested a VIP Consultation:%0A- Name: ${formData.name}%0A- Phone: ${formData.phone}%0A- Interest: ${formData.category}%0A- Date: ${formData.date}%0A- Slot: ${formData.timeSlot}%0A- Mode: ${formData.consultationType}`;
         setTimeout(() => {
-            window.open(`https://wa.me/918881121119?text=${msg}`, '_blank');
+            window.open(`https://wa.me/${BUSINESS_DETAILS.whatsappClean}?text=${msg}`, '_blank');
         }, 1200);
     };
 
@@ -49,7 +50,7 @@ export default function AtelierBookingModal({ isOpen, onClose }) {
                             </h2>
                             <div className="w-16 h-0.5 bg-[#C5A059] mx-auto mt-2.5"></div>
                             <p className="text-xs text-gray-600 mt-2">
-                                Experience personalized bridal styling, bespoke jewellery customization, and private viewing with our senior master jewellers.
+                                Experience personalized bridal styling, bespoke jewellery customization, and private viewing with our senior master jewellers at our Chaubepur, Kanpur showroom.
                             </p>
                         </div>
 
@@ -79,7 +80,7 @@ export default function AtelierBookingModal({ isOpen, onClose }) {
                                         value={formData.phone}
                                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                                         className="w-full bg-white border border-[#C5A059]/40 px-3.5 py-2.5 text-xs text-[#270611] focus:outline-none focus:border-[#6B0E2A]"
-                                        placeholder="+91 98765 43210"
+                                        placeholder="+91 93077 77500"
                                     />
                                 </div>
                                 <div>
@@ -95,7 +96,7 @@ export default function AtelierBookingModal({ isOpen, onClose }) {
                                         <option value="Polki & Kundan">Polki &amp; Kundan Jadau</option>
                                         <option value="22K Temple Gold">22K Temple Gold Sets</option>
                                         <option value="Diamond Solitaires">Diamond Solitaires &amp; Rings</option>
-                                        <option value="Bullion Investment">Gold / Silver Bullion Investment</option>
+                                        <option value="Gold Chains & Kangans">Gold Chains, Kangans &amp; Ornaments</option>
                                     </select>
                                 </div>
                             </div>
@@ -124,7 +125,7 @@ export default function AtelierBookingModal({ isOpen, onClose }) {
                                     >
                                         <option value="Morning (11:00 AM - 1:00 PM)">Morning (11:00 AM - 1:00 PM)</option>
                                         <option value="Afternoon (2:00 PM - 5:00 PM)">Afternoon (2:00 PM - 5:00 PM)</option>
-                                        <option value="Evening (5:30 PM - 8:30 PM)">Evening (5:30 PM - 8:30 PM)</option>
+                                        <option value="Evening (5:30 PM - 8:00 PM)">Evening (5:30 PM - 8:00 PM)</option>
                                     </select>
                                 </div>
                             </div>
@@ -138,9 +139,9 @@ export default function AtelierBookingModal({ isOpen, onClose }) {
                                     onChange={(e) => setFormData({ ...formData, consultationType: e.target.value })}
                                     className="w-full bg-white border border-[#C5A059]/40 px-3 py-2.5 text-xs text-[#270611] focus:outline-none focus:border-[#6B0E2A]"
                                 >
-                                    <option value="In-Store Private Lounge (Kanpur)">In-Store Private VIP Lounge (Kanpur)</option>
+                                    <option value="In-Store Private Lounge (Chaubepur, Kanpur)">In-Store Private Lounge (Chaubepur, Kanpur)</option>
                                     <option value="Virtual High-Def Video Consultation">Virtual HD Video Consultation</option>
-                                    <option value="Private Home Preview (On Request)">Private Home Preview (Subject to approval)</option>
+                                    <option value="Private Home Preview (On Request)">Private Home Preview (Family wedding)</option>
                                 </select>
                             </div>
 
@@ -160,10 +161,10 @@ export default function AtelierBookingModal({ isOpen, onClose }) {
                             Consultation Confirmed
                         </h3>
                         <p className="font-serif text-sm text-[#8C6D38] italic">
-                            "आपका स्वागत है यश ज्वेलर्स के शाही परिवार में"
+                            "आपका स्वागत है यश ज्वेलर्स के परिवार में"
                         </p>
                         <p className="text-xs text-gray-600 max-w-sm mx-auto">
-                            Thank you, {formData.name}. Our master jewellery consultant will reach out via WhatsApp / Call within 30 minutes to finalize your curated viewing.
+                            Thank you, {formData.name}. Our master jewellery consultant will reach out via WhatsApp / Call at {formData.phone} shortly to finalize your curated viewing.
                         </p>
                         <button
                             onClick={onClose}
@@ -178,4 +179,3 @@ export default function AtelierBookingModal({ isOpen, onClose }) {
         </div>
     );
 }
-

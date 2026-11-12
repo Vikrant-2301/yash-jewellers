@@ -50,7 +50,7 @@ export default function About() {
                             <div className="absolute -bottom-5 -left-5 bg-[#6B0E2A] text-white p-5 border border-[#C5A059]/50 shadow-xl max-w-xs hidden sm:block">
                                 <p className="font-serif text-3xl text-gold-gradient font-bold">1975</p>
                                 <p className="text-[10px] uppercase tracking-widest text-[#EAD8B1] mt-1">
-                                    Founded with honest bullion standards
+                                    Founded on pure gold purity standards
                                 </p>
                             </div>
                         </div>
@@ -73,7 +73,7 @@ export default function About() {
                             </p>
 
                             <p className="text-xs md:text-sm text-gray-700 leading-relaxed font-sans">
-                                Today, whether you walk into our private boutique lounge or consult our live bullion trading desk, that same foundational pledge remains: absolute carat integrity, crystalline making charge disclosure, and lifetime gold value buyback.
+                                Today, whether you walk into our Chaubepur boutique lounge or consult our live daily gold rates, that same foundational pledge remains: absolute carat integrity, crystalline making charge disclosure, and lifetime gold value buyback.
                             </p>
                         </div>
 
@@ -106,9 +106,9 @@ export default function About() {
                             },
                             {
                                 icon: Award,
-                                title: "Benchmark Bullion Parity",
+                                title: "Transparent Gold Parity",
                                 hi: "पारदर्शी भाव",
-                                desc: "Zero speculative retail markup. Our retail rates map directly to Kanpur and Delhi bullion spot standards with complete formula disclosure."
+                                desc: "Zero speculative retail markup. Our prices map directly to authentic daily market benchmarks with transparent itemized billing."
                             },
                             {
                                 icon: Gem,

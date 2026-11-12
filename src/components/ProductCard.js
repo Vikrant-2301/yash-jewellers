@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from 'react';
-import { MessageCircle, Eye, ShieldCheck, Sparkles, X, ChevronRight } from 'lucide-react';
+import { MessageCircle, Eye, ShieldCheck, Sparkles, X, TrendingUp } from 'lucide-react';
+import { useRates } from '@/src/context/RatesContext';
+import { BUSINESS_DETAILS } from '@/src/config/business';
 
 export default function ProductCard({ 
     id, 
@@ -17,16 +19,21 @@ export default function ProductCard({
     description = "Masterfully handcrafted by heritage karigars with 100% BIS Hallmarked gold, flawless gemstone settings, and timeless Indian symmetry."
 }) {
     const [showQuickView, setShowQuickView] = useState(false);
+    const { calculateJewelleryPrice, formatINR } = useRates();
 
-    // WhatsApp Direct Inquiry
+    // Dynamically calculate price based on live gold rates
+    const livePricing = calculateJewelleryPrice(weight, purity, making, price);
+    const displayPrice = livePricing.formattedPrice || price;
+
+    // WhatsApp Direct Inquiry with live pricing
     const handleInquiry = (e) => {
         if (e) e.stopPropagation();
-        const safePrice = price || "On Request";
+        const safePrice = displayPrice || "On Request";
         const safeCategory = category || "Jewellery";
         const safeTitle = title || "Product";
 
-        const phoneNumber = "918881121119";
-        const message = `Namaste Yash Jewellers, I am interested in inquiring about the "${safeTitle}" (${safeCategory}, Purity: ${purity}, Price: ₹${safePrice}). Kindly share detailed specifications and store availability.`;
+        const phoneNumber = BUSINESS_DETAILS.whatsappClean;
+        const message = `Namaste Yash Jewellers, I am interested in inquiring about "${safeTitle}" (${safeCategory}, Purity: ${purity}, Approx Weight: ${weight}, Live Estimated Price: ₹${safePrice}). Kindly share detailed specifications and showroom availability.`;
 
         const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
         window.open(url, '_blank');
@@ -101,9 +108,19 @@ export default function ProductCard({
 
                     <div className="mt-4 pt-3 border-t border-[#C5A059]/20">
                         <div className="mb-3">
-                            <p className="text-xs uppercase tracking-wider text-gray-500 text-[10px]">Landed Price (Incl. GST)</p>
+                            <div className="flex items-center justify-center gap-1.5 mb-1">
+                                <span className="text-[9px] uppercase tracking-wider text-gray-500">Live Estimated Price</span>
+                                {livePricing.isLive && (
+                                    <span className="inline-flex items-center gap-0.5 text-[8px] font-bold px-1.5 py-0.2 bg-emerald-100 text-emerald-800 rounded-xs border border-emerald-300">
+                                        <TrendingUp size={9} /> LIVE
+                                    </span>
+                                )}
+                            </div>
                             <p className="text-[#270611] font-serif text-xl font-bold tracking-tight">
-                                ₹ {price}
+                                ₹ {displayPrice}
+                            </p>
+                            <p className="text-[9px] text-[#8C6D38] italic mt-0.5">
+                                Incl. GST &amp; making charges
                             </p>
                         </div>
 
@@ -163,22 +180,41 @@ export default function ProductCard({
                                     )}
                                 </div>
 
+                                {/* Dynamic Price Breakdown based on Live Rate */}
                                 <div className="p-3 bg-[#F3E8D0]/50 border border-[#C5A059]/30 space-y-1.5 text-xs text-[#270611]">
                                     <div className="flex justify-between">
                                         <span className="text-gray-600">Purity Standard:</span>
                                         <span className="font-bold text-[#6B0E2A]">{purity}</span>
                                     </div>
                                     <div className="flex justify-between">
-                                        <span className="text-gray-600">Approx. Weight:</span>
+                                        <span className="text-gray-600">Gross Weight:</span>
                                         <span className="font-bold">{weight}</span>
                                     </div>
-                                    <div className="flex justify-between">
-                                        <span className="text-gray-600">Making Charges:</span>
-                                        <span className="font-bold">{making}</span>
-                                    </div>
+                                    {livePricing.isLive && (
+                                        <>
+                                            <div className="flex justify-between">
+                                                <span className="text-gray-600">Today's Live Rate:</span>
+                                                <span className="font-mono font-semibold text-emerald-800">
+                                                    ₹{formatINR(livePricing.ratePerGram)} / g
+                                                </span>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <span className="text-gray-600">Gold Metal Value:</span>
+                                                <span className="font-mono">₹{formatINR(livePricing.metalValue)}</span>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <span className="text-gray-600">Making Charges ({livePricing.makingPct}%):</span>
+                                                <span className="font-mono">₹{formatINR(livePricing.makingAmount)}</span>
+                                            </div>
+                                            <div className="flex justify-between">
+                                                <span className="text-gray-600">Govt GST (3%):</span>
+                                                <span className="font-mono">₹{formatINR(livePricing.gstAmount)}</span>
+                                            </div>
+                                        </>
+                                    )}
                                     <div className="flex justify-between">
                                         <span className="text-gray-600">Certification:</span>
-                                        <span className="font-bold text-emerald-800">Govt. BIS Hallmark</span>
+                                        <span className="font-bold text-emerald-800">BIS Hallmark (HUID)</span>
                                     </div>
                                 </div>
 
@@ -187,12 +223,12 @@ export default function ProductCard({
                                 </p>
 
                                 <div className="pt-2">
-                                    <p className="text-[10px] uppercase tracking-wider text-gray-500">Estimated Landed Price</p>
+                                    <p className="text-[10px] uppercase tracking-wider text-gray-500">Live Estimated Landed Price</p>
                                     <p className="font-serif text-3xl font-bold text-[#6B0E2A]">
-                                        ₹ {price}
+                                        ₹ {displayPrice}
                                     </p>
                                     <p className="text-[10px] text-gray-500 italic mt-0.5">
-                                        *Final amount may vary marginally based on live bullion spot rate on invoice date.
+                                        *Final invoice calculated dynamically using the exact live gold rate upon billing.
                                     </p>
                                 </div>
 
@@ -202,7 +238,7 @@ export default function ProductCard({
                                         className="flex-1 bg-[#6B0E2A] hover:bg-[#4E0A1E] text-white py-3 px-4 text-xs font-bold uppercase tracking-widest border border-[#C5A059]/50 flex items-center justify-center gap-2"
                                     >
                                         <MessageCircle size={15} className="text-[#C5A059]" />
-                                        Inquire on WhatsApp
+                                        Inquire on WhatsApp ({BUSINESS_DETAILS.phoneFormatted})
                                     </button>
                                 </div>
                             </div>

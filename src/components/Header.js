@@ -2,44 +2,24 @@
 
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { Menu, X, Phone, TrendingUp, ShieldCheck, Sparkles, Calendar, MessageCircle, ChevronDown } from 'lucide-react';
+import { Menu, X, Phone, TrendingUp, ShieldCheck, Sparkles, Calendar, MessageCircle } from 'lucide-react';
+import { useRates } from '@/src/context/RatesContext';
+import { BUSINESS_DETAILS } from '@/src/config/business';
 
 export default function Header() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [scrolled, setScrolled] = useState(false);
-    const [goldRate, setGoldRate] = useState(145200);
+    const { rates, formatINR } = useRates();
     const [rateTrend, setRateTrend] = useState('');
 
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener('scroll', handleScroll);
-
-        // Fetch initial rate from API
-        fetch('/api/rates')
-            .then(res => res.json())
-            .then(data => {
-                if (data?.rates?.gold24k) setGoldRate(data.rates.gold24k);
-            })
-            .catch(() => {});
-
-        // Realistic live rate tick update
-        const interval = setInterval(() => {
-            const delta = (Math.floor(Math.random() * 3) + 1) * 10 * (Math.random() > 0.5 ? 1 : -1);
-            setGoldRate(prev => {
-                const updated = prev + delta;
-                setRateTrend(delta > 0 ? 'tick-up' : 'tick-down');
-                setTimeout(() => setRateTrend(''), 1200);
-                return updated;
-            });
-        }, 3200);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            clearInterval(interval);
-        };
+        return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const formatINR = (n) => new Intl.NumberFormat('en-IN').format(n);
+    const gold24k = rates?.gold24k || 138250;
+    const gold22k = rates?.gold22k || 125000;
 
     return (
         <header className="z-50 sticky top-0 font-sans shadow-md">
@@ -48,24 +28,24 @@ export default function Header() {
                 <div className="flex items-center gap-3 md:gap-6">
                     <span className="hidden sm:inline-flex items-center gap-1.5 text-[#EAD8B1] tracking-wider">
                         <span className="w-1.5 h-1.5 rounded-full bg-[#C5A059] animate-pulse"></span>
-                        <span className="font-serif italic">विरासत एवं विश्वास</span> · Kanpur &amp; Delhi Benchmark · Estd. 1975
+                        <span className="font-serif italic">विरासत एवं विश्वास</span> · {BUSINESS_DETAILS.shortAddress}
                     </span>
                     <span className="flex items-center gap-1 text-[#C5A059] font-medium tracking-wide">
-                        <ShieldCheck size={13} className="text-[#DFBE7A]" /> 100% BIS Hallmarked 916 Gold
+                        <ShieldCheck size={13} className="text-[#DFBE7A]" /> 100% BIS Hallmarked (916) Gold
                     </span>
                 </div>
 
                 <div className="flex items-center gap-4">
                     <Link href="/rates" className="flex items-center gap-1.5 hover:opacity-90 transition-opacity bg-[#3A091A] px-2.5 py-1 rounded-sm border border-[#C5A059]/25">
                         <TrendingUp className="w-3.5 h-3.5 text-[#C5A059]" />
-                        <span className="text-[#EAD8B1] text-[10px] uppercase tracking-wider font-semibold">24K 999 (10g):</span>
-                        <span className={`rate-val font-mono font-bold text-xs ${rateTrend}`}>
-                            ₹{formatINR(goldRate)}
+                        <span className="text-[#EAD8B1] text-[10px] uppercase tracking-wider font-semibold">22K Gold (10g):</span>
+                        <span className={`rate-val font-mono font-bold text-xs text-white ${rateTrend}`}>
+                            ₹{formatINR(gold22k)}
                         </span>
                     </Link>
 
                     <Link href="/rates" className="text-[10px] text-[#C5A059] hover:text-[#FFF0D0] uppercase tracking-widest hidden md:inline font-bold transition-colors">
-                        Live Board →
+                        Live Rates →
                     </Link>
                 </div>
             </div>
@@ -90,7 +70,7 @@ export default function Header() {
                         <div className="flex items-center gap-2">
                             <span className="h-px w-6 bg-[#C5A059] hidden sm:inline-block" />
                             <span className="text-[9px] uppercase tracking-[0.35em] text-[#6B0E2A] font-semibold">
-                                Kanpur · Estd. 1975
+                                Chaubepur, Kanpur
                             </span>
                             <span className="h-px w-6 bg-[#C5A059] hidden sm:inline-block" />
                         </div>
@@ -98,7 +78,7 @@ export default function Header() {
                             YASH <span className="font-serif italic font-bold text-gold-gradient">JEWELLERS</span>
                         </h1>
                         <span className="text-[9px] tracking-[0.25em] text-[#8C6D38] uppercase font-medium mt-1">
-                            शाही आभूषण एवं शुद्धता का प्रतीक
+                            100% बीआईएस हॉलमार्क सोने-चांदी के आभूषण
                         </span>
                     </Link>
 
@@ -107,7 +87,7 @@ export default function Header() {
                         {[
                             { name: 'Home', path: '/', hi: 'गृह' },
                             { name: 'Collections', path: '/shop', hi: 'संग्रह' },
-                            { name: 'Live Rates', path: '/rates', hi: 'भाव' },
+                            { name: 'Live Gold Rates', path: '/rates', hi: 'सोना भाव' },
                             { name: 'Heritage', path: '/about', hi: 'विरासत' },
                             { name: 'Boutique', path: '/contact', hi: 'संपर्क' }
                         ].map((item) => (
@@ -124,18 +104,20 @@ export default function Header() {
 
                     {/* Desktop CTA Buttons */}
                     <div className="hidden lg:flex items-center gap-4">
-                        <Link
-                            href="/contact"
+                        <a
+                            href={`https://wa.me/${BUSINESS_DETAILS.whatsappClean}?text=${encodeURIComponent("Namaste Yash Jewellers, I would like to book a jewellery consultation.")}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
                             className="inline-flex items-center gap-2 bg-[#6B0E2A] hover:bg-[#4E0A1E] text-[#FAF7F2] px-5 py-2.5 text-[10px] font-bold uppercase tracking-[0.22em] border border-[#C5A059]/40 transition-all duration-300 shadow-sm hover:shadow-md"
                         >
                             <Calendar size={13} className="text-[#C5A059]" />
                             <span>Book Consultation</span>
-                        </Link>
+                        </a>
                     </div>
 
                     {/* Quick Call Icon for Mobile */}
                     <a 
-                        href="tel:+919336120419" 
+                        href={`tel:${BUSINESS_DETAILS.phoneClean}`}
                         aria-label="Call Yash Jewellers"
                         className="md:hidden text-[#6B0E2A] p-2 hover:bg-[#F3E8D0] rounded-full transition-colors"
                     >
@@ -160,7 +142,7 @@ export default function Header() {
                                     <h2 className="font-serif text-xl font-normal text-[#270611] tracking-wider">
                                         YASH <span className="text-gold-gradient font-bold">JEWELLERS</span>
                                     </h2>
-                                    <p className="text-[10px] uppercase tracking-widest text-[#6B0E2A]">Estd. 1975 · Kanpur</p>
+                                    <p className="text-[10px] uppercase tracking-widest text-[#6B0E2A]">Chaubepur · Kanpur</p>
                                 </div>
                                 <button 
                                     onClick={() => setIsMenuOpen(false)} 
@@ -173,10 +155,10 @@ export default function Header() {
                             {/* Hindi Welcome */}
                             <div className="my-5 p-3 bg-[#F3E8D0]/60 rounded-md border border-[#C5A059]/30 text-center">
                                 <p className="font-serif text-sm text-[#270611] italic">
-                                    "शुद्धता और विश्वास की आधी सदी"
+                                    "शुद्धता और विश्वास का अटूट बंधन"
                                 </p>
                                 <p className="text-[10px] text-[#6B0E2A] font-semibold mt-0.5 tracking-wider uppercase">
-                                    Kanpur Bullion Benchmark
+                                    100% BIS Hallmarked Jewellery
                                 </p>
                             </div>
 
@@ -184,7 +166,7 @@ export default function Header() {
                                 {[
                                     { name: 'Home', path: '/', hi: 'मुख्य पृष्ठ' },
                                     { name: 'High Jewellery Catalogue', path: '/shop', hi: 'शाही आभूषण संग्रह' },
-                                    { name: 'Live Bullion Rates', path: '/rates', hi: 'लाइव सोने-चांदी के भाव' },
+                                    { name: 'Live Gold Rates', path: '/rates', hi: 'लाइव सोने-चांदी के भाव' },
                                     { name: 'Heritage & Craftsmanship', path: '/about', hi: 'हमारी विरासत एवं कला' },
                                     { name: 'Bespoke Atelier & Store', path: '/contact', hi: 'स्टोर एवं निजी परामर्श' }
                                 ].map((item) => (
@@ -203,16 +185,16 @@ export default function Header() {
 
                         <div className="pt-6 border-t border-[#C5A059]/30 space-y-3">
                             <a 
-                                href="https://api.whatsapp.com/send?phone=919336120419"
+                                href={`https://wa.me/${BUSINESS_DETAILS.whatsappClean}?text=${encodeURIComponent("Namaste Yash Jewellers, I would like to inquire about your jewellery collection.")}`}
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 className="w-full flex items-center justify-center gap-2 bg-[#6B0E2A] text-white py-3 rounded-none text-xs font-bold uppercase tracking-widest border border-[#C5A059]/40"
                             >
                                 <MessageCircle size={16} className="text-[#C5A059]" />
-                                <span>WhatsApp Concierge</span>
+                                <span>WhatsApp ({BUSINESS_DETAILS.phoneFormatted})</span>
                             </a>
                             <p className="text-center text-[10px] text-[#8C6D38]">
-                                307 Krishna Niwas, Yusuf Meherali Rd &amp; Kanpur
+                                {BUSINESS_DETAILS.shortAddress}
                             </p>
                         </div>
                     </div>
